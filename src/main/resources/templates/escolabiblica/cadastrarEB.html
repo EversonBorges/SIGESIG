@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/MainlyLayout'">
+
+<body>
+	<section layout:fragment="content">
+		<div class="container-fluid">
+			<br />
+			<form class="form-horizontal" method="POST"
+				 th:object="${escolaBiblica}" th:action="@{/escolaBiblica/novo}">
+
+				<div style="margin-top: 50px;">
+
+					<div id="foo" th:fragment="mensagemGeral" class="alert alert-success"
+						th:if="${!#strings.isEmpty(message)}">
+						<span th:text="${message}"></span>
+					</div>
+
+					<div id="foo" th:fragment="mensagemErro" class="alert alert-danger"
+						th:if="${!#strings.isEmpty(messageErro)}">
+						<span th:text="${messageErro}"></span>
+					</div>
+
+					<div id="foo" class="alert alert-danger alert-box" th:if="${#fields.hasAnyErrors()}">
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<span th:text="${detailedError.message}"></span>
+						</div>
+					</div>
+					<div class="x_panel">
+						<input type="hidden" th:field="*{idEB}" />
+						<div >
+							<h2 style="float: left;" th:text="${title}"></h2>
+							<a style="float: right;" class="btn btn-dark aw-link-panel"
+								th:href="@{/escolaBiblica}"><i class="fa  fa-fw  fa-table"></i>&nbsp;
+								&nbsp;Listar Escolas </a>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_panel">
+							
+							<form class="form-horizontal form-label-left input_mask">
+								<h5 >Dados Gerais</h5>
+								<div class="x_panel">
+								<input type="hidden" th:field="*{idEB}" />
+								<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+								th:classappend="${#fields.hasErrors('turma')} ? has-error">
+									<label for="turma" class="required">Turma</label> <select id="turma"
+										class="form-control has-feedback-left" th:field="*{turma}">
+										<option value="">Selecione a Turma</option>
+										<option th:each="turma: ${turmas}" th:value="${turma}"
+											th:text="${turma}">Opção 1</option>
+
+										
+									</select>
+									<span class="fa fa-users form-control-feedback left"
+										aria-hidden="true"></span>
+								</div>
+
+								<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+								th:classappend="${#fields.hasErrors('professor')} ? has-error">
+									<label for="professor" class="required">Professor</label> <select id="professor"
+										class="form-control has-feedback-left" th:field="*{professor}">
+										<option value="">Selecione o Professor</option>
+										<option th:each="professor: ${membros}"
+											th:value="${professor.idMembro}" th:text="${professor.nome}">Opção
+											1</option>
+
+
+									</select>
+									<span class="fa fa-graduation-cap form-control-feedback left"
+										aria-hidden="true"></span>
+								</div>
+								<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+								th:classappend="${#fields.hasErrors('templo')} ? has-error">
+									<label for="templo" class="required">Templo</label> <select id="templo"
+										class="form-control has-feedback-left" th:field="*{templo}">
+										<option value="">Selecione o Templo</option>
+										<option th:each="templo: ${templos}" th:value="${templo.idTemplo}"
+											th:text="${templo.nomeFantasia}">Opção 1</option>
+
+										
+									</select>
+									<span class="fa fa-university form-control-feedback left"
+										aria-hidden="true"></span>
+								</div>
+
+								<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback">
+									<label for="tipo">Status</label> <select id="tipo"
+										class="form-control has-feedback-left" th:field="*{tipo}">
+										<option value="">Selecione o Status</option>
+										<option th:each="tipo: ${tipos}" th:value="${tipo}"
+											th:text="${tipo}">Opção 1</option>
+</select>
+										<span class="fa fa-info form-control-feedback left"
+										aria-hidden="true"></span>
+									
+								</div>
+								<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+									th:classappend="${#fields.hasErrors('dtInicio')} ? has-error">
+									<label for="dtInicio" class="required">Data Inicio</label>  <input type="text"
+										class="form-control has-feedback-left date" th:field="*{dtInicio}"
+										id="dtInicio" placeholder="Data Inicio"  /> <span
+										class="fa fa-calendar form-control-feedback left"
+										aria-hidden="true"></span>
+								</div>
+								</div>
+
+								<div class="form-group">
+
+									<div id="botao">
+										<a  class="btn btn-info"
+								th:href="@{/escolaBiblica}">Cancelar</a>
+										<button class="btn btn-primary" type="reset">Limpar</button>
+										<button type="submit" class="btn btn-success" th:text="${btn}"></button>
+
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+	</section>
+</body>
+
+</html>

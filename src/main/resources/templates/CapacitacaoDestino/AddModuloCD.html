@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/MainlyLayout'">
+
+<body>
+	<section layout:fragment="content">
+		<div class="container-fluid">
+			<br />
+			<div class="x_panel">
+
+				<div>
+					<h2 style="float: left;" th:text="${title}"></h2>
+					<a style="float: right;" class="btn btn-dark aw-link-panel"
+						th:href="@{/capacitacaoDestino}"><i class="fa  fa-fw  fa-table"></i>&nbsp;
+						&nbsp;Listar Turmas </a>
+						
+					<div class="clearfix"></div>
+				</div>
+				
+				<div class="x_panel">
+					<h5>Dados Turma</h5>
+
+					<div th:each="lider : ${capacitacaoDestino}" class="container">
+						<div class="row">
+							<h4>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Código: <span
+									th:text="${lider.idCD}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Templo: <span th:text="${lider.templo.nomeFantasia}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Data Inicio: <span th:text="${lider.dtInicio}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Status: <span th:text="${lider.tipo}"></span>
+							</h4>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+						</div>
+					</div>
+				</div>
+				<div class="x_panel">
+						<span th:each="modulo: ${modulos}">
+						<img th:src="${modulo.img}" th:value="${modulo.descricaoMod}" onclick="add(value);add2(value)" />
+						<button th:text="${modulo.descricaoMod}" th:value="${modulo.idCriarModulo}" onclick="add(value)" class="btn btn-dark aw-link-panel" ></button>
+						</span>	
+				</div>
+
+				<div class="x_panel">
+					<form class="form-horizontal js-form-loading" method="POST"
+						th:object="${modulos}">
+						<div style="margin-top: 50px;">
+							<div id="foo" th:fragment="mensagemGeral"
+								class="alert alert-success"
+								th:if="${!#strings.isEmpty(message)}">
+								<span th:text="${message}"></span>
+							</div>
+
+							<div id="foo" th:fragment="mensagemErro"
+								class="alert alert-danger"
+								th:if="${!#strings.isEmpty(messageErro)}">
+								<span th:text="${messageErro}"></span>
+							</div>
+
+							<div id="foo" class="alert alert-danger"
+								th:if="${#fields.hasAnyErrors()}">
+								<div th:each="detailedError : ${#fields.detailedErrors()}">
+									<span th:text="${detailedError.message}"></span>
+								</div>
+
+							</div>
+						</div>
+							<h5>Dados Gerais</h5>
+							<div class="ln_solid"></div>
+							<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
+								<label for="descricao" class="required">Modulo</label> <input
+									type="text" class="form-control has-feedback-left"
+									name="modulo" id="modulo" placeholder="Modulo" /> <span
+									class="fa fa-calendar form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+							<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
+								<!--  th:classappend="${#fields.hasErrors('descricao')} ? has-error"-->
+								<label for="descricao" class="required">Descrição</label> <input
+									type="text" class="form-control has-feedback-left"
+									name="descricao" id="descricao" placeholder="Descrição" /> <span
+									class="fa fa-calendar form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+							<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
+								<!--  th:classappend="${#fields.hasErrors('dtInicio')} ? has-error"-->
+								<label for="dtInicio" class="required">Data Inicio</label> <input
+									type="date" class="form-control has-feedback-left"
+									name="dtInicio" id="dtInicio" placeholder="Data Inicio" /> <span
+									class="fa fa-calendar form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+
+							<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
+								<!--  th:classappend="${#fields.hasErrors('dtTermino')} ? has-error"-->
+								<label for="dtTermino" class="required">Data Término</label> <input
+									type="date" class="form-control has-feedback-left"
+									name="dtTermino" id="dtTermino" placeholder="Data Termino" />
+								<span class="fa fa-calendar form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+
+							<div class="form-group">
+
+								<div id="botao">
+									<a class="btn btn-info" th:href="@{/capacitacaoDestino}">Cancelar</a>
+									<button class="btn btn-primary" type="reset">Limpar</button>
+									<button type="submit" class="btn btn-success">Adicionar</button>
+
+								</div>
+							</div>
+					</form>
+				</div>
+				<div class="x_panel">
+					<h5>Alunos Matriculados</h5>
+
+					<div class="x_content">
+								<div class="card-box table-responsive">
+									 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th><i class="fa  fa-fw  fa-plus-square"></i>&nbsp;&nbsp;&nbsp;Adicionar</th>
+											<th><i class="fa  fa-fw  fa-plus-square"></i>&nbsp;&nbsp;&nbsp;Adicionar</th>
+											<th>Descrição</th>
+											<th>Data Inicio</th>
+											<th>Data Término</th>
+											<th>EX</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr th:each="criar: ${criarModulos}">
+											<td><a class="btn btn-dark btn-xs"
+													th:href="@{/capacitacaoDestino/modulo/aluno/{idModulo}(idModulo=${criar.idModulo})}"> 
+													Aluno
+												</a></td>
+												<td><a class="btn btn-dark btn-xs"
+													th:href="@{/capacitacaoDestino/modulo/aula/{idModulo}(idModulo=${criar.idModulo})}"> 
+													Aula
+												</a></td>
+												
+											
+											<td th:text="${criar.modulo.descricaoMod}">1</td>
+											<td th:text="${criar.dtInicio}">1</td>
+											<td th:text="${criar.dtTermino}">1</td>
+											<td>
+											
+												<form method="POST"
+													th:onsubmit="'return confirm(\'Remover Modulo ' + 
+													${criar.modulo.descricaoMod} +' ?\');'"
+													th:action="@{/capacitacaoDestino/modulo/{idModulo}/{id}(idModulo=${criar.idModulo} ,id=${criar.destino.idCD})}">
+													<input type="hidden" name="_method" value="DELETE" />
+
+													<button type="submit" class="btn btn-danger btn-xs">
+														<span class="fa fa-trash"></span>
+													</button>
+												</form>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+								</div>
+							</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/MainlyLayout'">
+
+<body>
+	<section layout:fragment="content">
+		<div class="container-fluid">
+			<br />
+			<div class="x_panel">
+
+				<div>
+					<h2 style="float: left;" th:text="${title}"></h2>
+					<a style="float: right;" class="btn btn-dark aw-link-panel"
+						th:href="@{/celulas}"><i class="fa  fa-fw  fa-table"></i>&nbsp;
+						&nbsp;Listar Células </a>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="x_panel">
+					<h5>Dados Célula</h5>
+
+					<div th:each="celula : ${celulas}" class="container">
+						<div class="row">
+							<h4>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nome: <span
+									th:text="${celula.nome}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Lider: <span th:text="${celula.lider.nome}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Anfitrião: <span th:text="${celula.anfitriao}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Status: <span th:text="${celula.tipo}"></span>
+							</h4>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+						</div>
+					</div>
+				</div>
+				<div class="x_panel">
+					<form class="form-horizontal" method="POST" th:object="${participanteCL}">
+						<div style="margin-top: 50px;">
+
+							<div id="foo" th:fragment="mensagemGeral" class="alert alert-success"
+						th:if="${!#strings.isEmpty(message)}">
+						<span th:text="${message}"></span>
+					</div>
+
+					<div id="foo" th:fragment="mensagemErro" class="alert alert-danger"
+						th:if="${!#strings.isEmpty(messageErro)}">
+						<span th:text="${messageErro}"></span>
+					</div>
+
+					<div id="foo" class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<span th:text="${detailedError.message}"></span>
+						</div>
+					</div>
+							<h5>Dados Gerais</h5>
+							<div class="x_panel">
+							<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+								th:classappend="${#fields.hasErrors('nome')} ? has-error">
+								<label for="nome" class="required">Nome</label> <input type="text"
+									class="form-control has-feedback-left" th:field="*{nome}"
+									id="nome" placeholder="Nome Completo" /> <span
+									class="fa fa-user form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+
+							<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+								th:classappend="${#fields.hasErrors('email')} ? has-error">
+								<label for="email">Email</label> <input type="text"
+									class="form-control has-feedback-left" th:field="*{email}"
+									id="email" placeholder="Email" /> <span
+									class="fa fa-at form-control-feedback left" aria-hidden="true"></span>
+							</div>
+
+							<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+								th:classappend="${#fields.hasErrors('dtNasc')} ? has-error">
+								<label for="dtNasc" class="required">Data Nascimento</label> <input type="date"
+									class="form-control has-feedback-left" th:field="*{dtNasc}"
+									id="dtNasc" placeholder="Data Nascimento"
+									onkeyup="calculaIdade()" /> <span
+									class="fa fa-calendar form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+
+							<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+								th:classappend="${#fields.hasErrors('celular')} ? has-error">
+								<label for="celular" class="required">Celular</label> <input type="text"
+									class="form-control has-feedback-left phone"
+									th:field="*{celular}" id="celular" placeholder="Celular" /> <span
+									class="fa fa-mobile form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+
+							<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback">
+								<label for="whatsaap">Whatsaap</label> <select id="whatsaap"
+									class="form-control has-feedback-left" th:field="*{whatsaap}">
+									<option value="">Opc</option>
+									<option th:each="whatsaap: ${whatsaaps}" th:value="${whatsaap}"
+										th:text="${whatsaap}">Opção 1</option>
+								</select> <span class="fa fa-whatsapp form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+							
+							<div
+										class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('religiao')} ? has-error">
+										<label for="religiao" class="required">Religião</label> <select id="religiao"
+											class="form-control has-feedback-left" th:field="*{religiao}">
+											<option value="">Religião</option>
+											<option th:each="religiao: ${religioes}" th:value="${religiao}"
+												th:text="${religiao}">Opção 1</option>
+										</select> <span class="fa fa-heart form-control-feedback left"
+											aria-hidden="true"></span>
+
+									</div>
+							
+							</div>
+								<h5>Endereço</h5>
+								<div class="x_panel">
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('cep')} ? has-error">
+										<label for="cep" class="required">CEP</label> <input type="text"
+											class="form-control has-feedback-left cep" th:field="*{cep}"
+											name="cep" id="cep" placeholder="Cep" /> <span
+											class="fa fa-calendar form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('rua')} ? has-error">
+										<label for="rua">Rua</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{rua}"
+											name="rua" id="rua" placeholder="Rua" /> <span
+											class="fa fa-road form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+									<div
+										class="col-md-2 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('numero')} ? has-error">
+										<label for="numero">Número</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{numero}"
+											id="numero" placeholder="Número" /> <span
+											class="fa fa-sort-numeric-asc form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('complemento')} ? has-error">
+										<label for="complemento">Complemento</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{complemento}"
+											id="complemento" placeholder="Complemento" /> <span
+											class="fa fa-location-arrow form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+									
+									<div
+										class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('bairro')} ? has-error">
+										<label for="bairro">Bairro</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{bairro}"
+											name="bairro" id="bairro" placeholder="Bairro" /> <span
+											class="fa fa-bold form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+									
+									<div
+										class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('cidade')} ? has-error">
+										<label for="cidade">Cidade</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{cidade}"
+											name="cidade" id="cidade" placeholder="Cidade" /> <span
+											class="fa fa-map-signs form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+									
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('uf')} ? has-error">
+										<label for="uf">Estado</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{uf}"
+											name="uf" id="uf" placeholder="Estado" /> <span
+											class="fa fa-globe form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+								</div>
+
+							<div class="form-group">
+
+								<div id="botao">
+									<a class="btn btn-info" th:href="@{/celulas}">Cancelar</a>
+									<button class="btn btn-primary" type="reset">Limpar</button>
+									<button type="submit" class="btn btn-success">Matricular</button>
+
+								</div>
+							</div>
+					</form>
+				</div>
+				<div class="x_panel">
+					<h5>Alunos Matriculados</h5>
+
+					<div class="x_content">
+						<div class="card-box table-responsive">
+							<table id="datatable-responsive"
+								class="table table-striped table-bordered dt-responsive nowrap"
+								cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>Matricula</th>
+										<th>Nome</th>
+										<th>Data Nascimento</th>
+										<th>Celular</th>
+										<th>-</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="participante: ${participantes}">
+										<td th:text="${participante.idParticipante}"></td>
+										<td th:text="${participante.nome}">1</td>
+										<td th:text="${participante.dtNasc}">1</td>
+										<td th:text="${participante.celular}">1</td>
+										<td>
+											<form method="POST"
+												th:onsubmit="'return confirm(\'Remover Participante ' + 
+													${participante.nome} +' ?\');'"
+												th:action="@{/celulas/add/{idParticipante}(idParticipante=${participante.idParticipante})}">
+												<input type="hidden" name="_method" value="DELETE" />
+
+												<button type="submit" class="btn btn-danger btn-xs">
+													<span class="fa fa-trash"></span>
+												</button>
+											</form>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</body>
+
+</html>

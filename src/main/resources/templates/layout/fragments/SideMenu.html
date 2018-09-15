@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+
+<body>
+	<div class="col-md-3 left_col" th:fragment="SideMenu">
+		<div class="col-md-3 left_col  menu_fixed">
+			<div class="left_col scroll-view">
+				<div class="navbar nav_title" style="border: 0;">
+					<a th:href="@{/}" class="site_title"><i class="fa fa-handshake-o"></i>
+						<span>SIGESIG</span></a>
+				</div>
+
+				<!-- menu profile quick info -->
+				<div class="profile">
+					<div class="profile_pic">
+						<img th:src="@{/layout/images/img.png}" alt="..."
+							class="img-circle profile_img" />
+					</div>
+					<div class="profile_info">
+						<h5><span>Bem Vindo!</span></br>
+						<span th:text="*{User}"></span>
+						<span th:text="*{templo}"></span>
+	
+	
+	
+	</h5>
+	
+					</div>
+					
+					
+				</div>
+				<!-- /menu profile quick info -->
+
+				<!-- sidebar menu -->
+				<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+					<div class="menu_section">
+						<h3>Geral</h3>
+						<ul class="nav side-menu font">
+							<li><a th:href="@{/}"><i class="fa fa-home"></i> Inicio</a></li>
+							<li ><a th:href="@{/membros}"><i class="fa fa-users"></i>Membros</a></li>
+							<li ><a th:href="@{/visitantes}"><i class="fa fa-user"></i>Visitantes</a></li>
+							<li ><a th:href="@{/templos}"><i class="fa fa-university"></i>Templo</a></li>
+							<li ><a th:href="@{/celulas}"><i class="fa fa-heartbeat"></i>Células</a></li>
+							<li ><a th:href="@{/escolaBiblica}"><i class="fa fa-leanpub"></i>Escola Bíblica</a></li>
+							<li ><a><i class="fa fa-graduation-cap"></i>Capacitação Destino<span class="fa fa-chevron-down"></span></a>
+								<ul class="nav child_menu">
+									<li><a th:href="@{/capacitacaoDestino}"><i class="fa fa-graduation-cap"></i>Cadastrar Turma</a></li>
+									<li><a th:href="@{/criarModulo}"><i class="fa fa-graduation-cap"></i>Criar Modulo</a></li>
+									<li><a th:href="@{/chamada/novo}"><i class="fa fa-graduation-cap"></i>Chamada</a></li>
+									
+								</ul>
+							</li>
+							<li> <a><i class="fa fa-money"></i>Financeiro</a></li>
+							<li><a><i class="fa fa-users"></i>Usuário</a></a>
+								<ul class="nav child_menu">
+									<li><a th:href="@{/usuario/novoCadastro}"><i class="fa fa-user-plus"></i>Cadastrar Usuario</a></li>
+									<li><a th:href="@{/usuario/consultar}"><i class="fa fa-search"></i>Consultar Usuario</a></li>
+									
+									
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- /menu footer buttons -->
+				<div class="sidebar-footer hidden-small">
+				<form id="mail_form" action="/logout" method="post" >
+					<a data-toggle="tooltip" data-placement="top" title="Status">
+						<span class="fa fa-info" aria-hidden="true"></span>
+					</a> <a data-toggle="tooltip" data-placement="top" title="Turma">
+						<span class="glyphicon glyphicon-text-width" aria-hidden="true"></span>
+					</a> <a th:href="@{/ministerio}" data-toggle="tooltip" data-placement="top" title="Configuraões"> <span
+						class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+						
+						
+		        		<a href="#" onClick="document.getElementById('mail_form').submit();" data-toggle="tooltip" data-placement="top" >
+		        			<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+		        		</a>
+		        		
+		        		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			      	</form>
+				</div>
+				<!-- /menu footer buttons -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

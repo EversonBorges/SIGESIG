@@ -1,0 +1,19 @@
+.errorLogin{
+	color: #B40404;
+	font-weight: bolder;
+	font-family: Arial;
+	font-size: 20px;
+}
+
+h4{
+	color: #5caceb;
+	font-weight: bolder;
+	font-family: Arial;
+	font-size: 30px;
+}
+
+.erro-msg {
+	color: red;
+	font-weight: bolder;
+	
+}

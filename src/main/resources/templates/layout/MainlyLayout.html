@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<title>SIGESIG</title>
+
+<!-- Bootstrap -->
+<link th:href="@{/css/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<!-- Font Awesome -->
+<link th:href="@{/css/font-awesome-4.7.0/css/font-awesome.min.css}"
+	rel="stylesheet" />
+<!-- Custom Theme Style -->
+<link th:href="@{/layout/css/stilo.css}" rel="stylesheet" />
+<link th:href="@{/layout/css/stiloDT.css}" rel="stylesheet" />
+<link th:href="@{/layout/css/cssFile/normalize.css}" rel="stylesheet" />
+<link th:href="@{/layout/css/cssFile/demo.css}" rel="stylesheet" />
+<link th:href="@{/layout/css/cssFile/component.css}" rel="stylesheet" />
+<link th:href="@{/css/msg.css}" rel="stylesheet" />
+
+
+<!-- INICIO  -->
+
+     <!-- NProgress -->
+    <link th:href="@{/css/nprogress/nprogress.css}" rel="stylesheet" />
+    <!-- iCheck -->
+    <link th:href="@{/vendors/datatable/iCheck/skins/flat/green.css}" rel="stylesheet" />
+   
+    <!-- Datatables -->
+    <link th:href="@{/vendors/datatable/datatables.net-bs/css/dataTables.bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/vendors/datatable/datatables.net-buttons-bs/css/buttons.bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/vendors/datatable/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/vendors/datatable/datatables.net-responsive-bs/css/responsive.bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/vendors/datatable/datatables.net-scroller-bs/css/scroller.bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}" rel="stylesheet" />
+<!-- FIM -->
+
+<style>
+   #botao{ text-align: center }
+.botaoEnviar{
+    width: 350px;
+    text-align: center;
+    padding: 15px 20px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background-color: #FCC302;
+    font-size: 18px;
+}
+
+    </style>
+
+</head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<div th:replace="layout/fragments/SideMenu :: SideMenu "></div>
+			<div th:replace="layout/fragments/TopBar :: TopBar"></div>
+			<span th:text="*{User}"></span>
+						<span th:text="*{templo}"></span>
+			<div class="right_col" layout:fragment="content" role="main"
+				style=" background-color: #DCDCDC;"></div>
+			<div th:replace="layout/fragments/Footer :: Footer"></div>
+		</div>
+
+
+	</div>
+
+	<!-- jQuery -->
+	<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+	<!-- Bootstrap -->
+	<script th:src="@{/css/bootstrap/dist/js/bootstrap.min.js}"></script>
+	<!-- FastClick -->
+	<script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+	<!-- NProgress -->
+	<script th:src="@{/css/nprogress/nprogress.js}"></script>
+	<!-- modal framework -->
+	<script th:src="@{/vendors/modalFramework/bootbox.min.js}"></script>
+	<!-- Custom Theme Scripts -->
+	<script th:src="@{/layout/js/stilo.js}"></script>
+	<script th:src="@{/layout/js/idade.js}"></script>
+	<script th:src="@{/layout/js/validaCep.js}"></script>
+	<script th:src="@{/js/mask.js}"></script>
+	<script th:src="@{/layout/js/exibeDiv.js}"></script>
+	<script th:src="@{/layout/js/VisualizarImagem.js}"></script>
+	<script th:src="@{/layout/js/jsFile/custom-file-input.js}"></script>
+	<script th:src="@{/layout/js/preencherInput.js}"></script>
+	<script th:src="@{/layout/js/selectDependencia.js}"></script>
+	<!--  script th:src="@{/layout/js/comparaSenha.js}"></script-->
+	<script th:src="@{/layout/js/capsAtivo.js}"></script>
+
+	<!-- INICIO -->
+	<!-- iCheck -->
+    <script th:src="@{/vendors/datatable/iCheck/icheck.min.js}"></script>
+
+    <!-- Datatables -->
+
+    <script th:src="@{/vendors/datatable/datatables.net/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-buttons-bs/js/buttons.bootstrap.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-buttons/js/buttons.flash.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-buttons/js/buttons.print.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-keytable/js/dataTables.keyTable.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-responsive-bs/js/responsive.bootstrap.js}"></script>
+    <script th:src="@{/vendors/datatable/datatables.net-scroller/js/dataTables.scroller.min.js}"></script>
+    <script th:src="@{/vendors/datatable/jszip/dist/jszip.min.js}"></script>
+    <script th:src="@{/vendors/datatable/pdfmake/build/pdfmake.min.js}"></script>
+    <script th:src="@{/vendors/datatable/pdfmake/build/vfs_fonts.js}"></script>
+    <script th:src="@{/vendors/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js}"></script>
+    <script th:src="@{/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+     
+    <!-- FIM -->
+    
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$('#datatable-responsive').DataTable();
+		});
+	</script>
+	
+	<script>
+	(function(e,t,n)
+			{var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);
+	</script>
+	
+	<th:block layout:fragment="javascript-extra"></th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/MainlyLayout'">
+
+<body>
+	<section layout:fragment="content">
+		<div class="container-fluid">
+			<br />
+			<form class="form-horizontal" method="POST" th:object="${celulas}"
+				th:action="@{/celulas/novo}">
+
+				<div style="margin-top: 50px;">
+
+					<div id="foo" th:fragment="mensagemGeral"
+						class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
+						<span th:text="${message}"></span>
+					</div>
+
+					<div id="foo" th:fragment="mensagemErro" class="alert alert-danger"
+						th:if="${!#strings.isEmpty(messageErro)}">
+						<span th:text="${messageErro}"></span>
+					</div>
+
+					<div id="foo" class="alert alert-danger alert-box"
+						th:if="${#fields.hasAnyErrors()}">
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<span th:text="${detailedError.message}"></span>
+						</div>
+					</div>
+					<div class="x_panel">
+						<input type="hidden" th:field="*{idCelula}" />
+						<div>
+							<h2 style="float: left;" th:text="${title}"></h2>
+							<a style="float: right;" class="btn btn-dark aw-link-panel"
+								th:href="@{/celulas}"><i class="fa  fa-fw  fa-table"></i>&nbsp;
+								&nbsp;Listar Células </a>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_panel">
+
+							<form class="form-horizontal form-label-left input_mask">
+								<h5>Dados Cadastrais</h5>
+								<div class="x_panel">
+
+									<input type="hidden" th:field="*{idCelula}" />
+									<div
+										class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('nome')} ? has-error">
+										<label for="nome" class="required">Nome</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{nome}"
+											id="nome" placeholder="Nome" /> <span
+											class="fa fa-calendar form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('dtAbertura')} ? has-error">
+										<label for="dtAbertura" class="required">Data Abertura</label> <input
+											type="date" class="form-control has-feedback-left"
+											th:field="*{dtAbertura}" id="dtAbertura"
+											placeholder="Data Abertura" /> <span
+											class="fa fa-calendar form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('tipo')} ? has-error">
+										<label for="tipo" class="required">Status</label> <select id="tipo"
+											class="form-control has-feedback-left" th:field="*{tipo}">
+											<option value="">Selecione</option>
+											<option th:each="tipo: ${tipos}" th:value="${tipo}"
+												th:text="${tipo}">Opção 1</option>
+										</select> <span class="fa fa-info form-control-feedback left"
+											aria-hidden="true"></span>
+
+									</div>
+								</div>
+								<h5>Contato</h5>
+								<div class="x_panel">
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('celularLider')} ? has-error">
+										<label for="celularLider">Celular Lider</label> <input
+											type="text" class="form-control has-feedback-left phone"
+											th:field="*{celularLider}" id="celularLider"
+											placeholder="Celular Lider" /> <span
+											class="fa fa-mobile form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-2 col-sm-6 col-xs-12 form-group has-feedback">
+										<label for="whatsaap">Whatsaap</label> <select id="whatsaap"
+											class="form-control has-feedback-left" th:field="*{whatsaap}">
+											<option value="">Opc</option>
+											<option th:each="whatsaap: ${whatsaaps}"
+												th:value="${whatsaap}" th:text="${whatsaap}">Opção
+												1</option>
+										</select> <span class="fa fa-whatsapp form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('Tipo')} ? has-error">
+										<label for="fixo">Fixo</label> <input type="text"
+											class="form-control has-feedback-left fixo"
+											th:field="*{fixo}" id="fixo" placeholder="Fixo" /> <span
+											class="fa fa-phone form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('Tipo')} ? has-error">
+										<label for="email">Email</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{email}"
+											id="email" placeholder="Email" /> <span
+											class="fa fa-at form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+								</div>
+								<h5>Endereço</h5>
+								<div class="x_panel">
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('cep')} ? has-error">
+										<label for="cep" class="required">CEP</label> <input type="text"
+											class="form-control has-feedback-left cep" th:field="*{cep}"
+											name="cep" id="cep" placeholder="Cep" /> <span
+											class="fa fa-calendar form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('Tipo')} ? has-error">
+										<label for="rua">Rua</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{rua}"
+											name="rua" id="rua" placeholder="Rua" /> <span
+											class="fa fa-road form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+									<div
+										class="col-md-2 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('Tipo')} ? has-error">
+										<label for="numero">Número</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{numero}"
+											id="numero" placeholder="Número" /> <span
+											class="fa fa-sort-numeric-asc form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('Tipo')} ? has-error">
+										<label for="complemento">Complemento</label> <input
+											type="text" class="form-control has-feedback-left"
+											th:field="*{complemento}" id="complemento"
+											placeholder="Complemento" /> <span
+											class="fa fa-location-arrow form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('Tipo')} ? has-error">
+										<label for="bairro">Bairro</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{bairro}"
+											name="bairro" id="bairro" placeholder="Bairro" /> <span
+											class="fa fa-bold form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('Tipo')} ? has-error">
+										<label for="cidade">Cidade</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{cidade}"
+											name="cidade" id="cidade" placeholder="Cidade" /> <span
+											class="fa fa-map-signs form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('Tipo')} ? has-error">
+										<label for="uf">Estado</label> <input type="text"
+											class="form-control has-feedback-left" th:field="*{uf}"
+											name="uf" id="uf" placeholder="Estado" /> <span
+											class="fa fa-globe form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+								</div>
+
+								<h5>Dados Gerais</h5>
+								<div class="x_panel">
+									<div
+										class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('lider')} ? has-error">
+										<label for="lider" class="required">Lider</label> <select id="batizado"
+											class="form-control has-feedback-left" th:field="*{lider}">
+											<option value="">Selecione</option>
+											<option th:each="lider: ${lideres}"
+												th:value="${lider.idMembro}" th:text="${lider.nome}">Opção
+												1</option>
+										</select> <span class="fa fa-tint form-control-feedback left"
+											aria-hidden="true"></span>
+
+									</div>
+
+									<div
+										class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('timoteo')} ? has-error">
+										<label for="timoteo" class="required">Timóteo</label> <select id="ministerio"
+											class="form-control has-feedback-left" th:field="*{timoteo}">
+											<option value="">Selecione</option>
+											<option th:each="timoteo: ${timoteos}"
+												th:value="${timoteo.idMembro}" th:text="${timoteo.nome}">Opção
+												1</option>
+										</select> <span class="fa fa-leaf form-control-feedback left"
+											aria-hidden="true"></span>
+
+									</div>
+									<div
+										class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('anfitriao')} ? has-error">
+										<label for="anfitriao" class="required">Anfitrião</label> <input type="text"
+											class="form-control has-feedback-left"
+											th:field="*{anfitriao}" id="anfitriao"
+											placeholder="Anfitrião" /> <span
+											class="fa fa-calendar form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('supervisor')} ? has-error">
+										<label for="supervisor" class="required">Supervisor</label> <select
+											id="supervisor" class="form-control has-feedback-left"
+											th:field="*{supervisor}">
+											<option value="">Selecione</option>
+											<option th:each="supervisor: ${supervisores}"
+												th:value="${supervisor.idMembro}"
+												th:text="${supervisor.nome}">Opção 1</option>
+
+
+										</select> <span class="fa fa-university form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+
+									<div
+										class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('superArea')} ? has-error">
+										<label for="superArea" class="required">Supervisor Área</label> <select
+											id="superArea" class="form-control has-feedback-left"
+											th:field="*{superArea}">
+											<option value="">Selecione</option>
+											<option th:each="superArea: ${superAreas}"
+												th:value="${superArea.idMembro}" th:text="${superArea.nome}">Opção
+												1</option>
+										</select> <span class="fa fa-university form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+								</div>
+
+								<div class="form-group">
+
+									<div id="botao">
+										<a class="btn btn-info" th:href="@{/celulas}">Cancelar</a>
+										<button class="btn btn-primary" type="reset">Limpar</button>
+										<button type="submit" class="btn btn-success" th:text="${btn}"></button>
+
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+	</section>
+</body>
+
+</html>

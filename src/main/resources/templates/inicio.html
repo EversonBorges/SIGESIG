@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="'layout/MainlyLayout'">
+
+	<head>
+		<title>Bem vindo ao sistema!</title>
+	</head>
+	
+	<body>
+	<div layout:fragment="content">
+			<div class="page-header">
+				<h1> <label sec:authentication="principal.nome"></label>, Bem vindo ao sistema!</h1>	
+				
+				Logged user: <span sec:authentication="principal.nome">Bob</span><br>
+				<span sec:authentication="principal.login"></span><br>
+							<span sec:authentication="principal.permissoes"></span><br>
+Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+		</div>	
+	</div>
+		
+	</body>
+</html>

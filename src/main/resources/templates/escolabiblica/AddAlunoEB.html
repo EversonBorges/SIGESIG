@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/MainlyLayout'">
+
+<body>
+	<section layout:fragment="content">
+		<div class="container-fluid">
+			<br />
+			<div class="x_panel">
+
+				<div>
+					<h2 style="float: left;" th:text="${title}"></h2>
+					<a style="float: right;" class="btn btn-dark aw-link-panel"
+						th:href="@{/escolaBiblica}"><i class="fa  fa-fw  fa-table"></i>&nbsp;
+						&nbsp;Listar Escolas </a>
+					<div class="clearfix"></div>
+				</div>
+				
+				<div class="x_panel">
+					<h5>Dados Escola</h5>
+
+					<div th:each="escolaBiblica : ${escolasBiblicas}" class="container">
+						<div class="row">
+							<h4>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Turma: <span
+									th:text="${escolaBiblica.turma}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Professor: <span th:text="${escolaBiblica.professor.nome}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Templo: <span th:text="${escolaBiblica.templo.nomeFantasia}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Status: <span th:text="${escolaBiblica.tipo}"></span>
+							</h4>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+						</div>
+					</div>
+				</div>
+				<div class="x_panel">
+					<form class="form-horizontal" method="POST"
+						th:object="${addAlunoEB}">
+						<div style="margin-top: 50px;">
+
+							<div id="foo" th:fragment="mensagemGeral"
+								class="alert alert-success"
+								th:if="${!#strings.isEmpty(message)}">
+								<span th:text="${message}"></span>
+							</div>
+
+							<div id="foo" th:fragment="mensagemErro"
+								class="alert alert-danger"
+								th:if="${!#strings.isEmpty(messageErro)}">
+								<span th:text="${messageErro}"></span>
+							</div>
+
+							<div id="foo" class="alert alert-danger"
+								th:if="${#fields.hasAnyErrors()}">
+								<div th:each="detailedError : ${#fields.detailedErrors()}">
+									<span th:text="${detailedError.message}"></span>
+								</div>
+
+							</div>
+						</div>
+							<h5>Dados Gerais</h5>
+							<div class="ln_solid"></div>
+							<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+								th:classappend="${#fields.hasErrors('alunos')} ? has-error">
+								<label for="alunos" class="required">Aluno</label> <select
+									id="alunos" name="alunos"
+									class="form-control has-feedback-left">
+									<option value="">Selecione</option>
+									<option th:each="aluno: ${alunos}" th:value="${aluno.idMembro}"
+										th:text="${aluno.nome}">Opção 1</option>
+
+
+								</select> <span class="fa fa-graduation-cap form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+
+							<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+								th:classappend="${#fields.hasErrors('dtInicioEB')} ? has-error">
+								<label for="dtInicioEB" class="required">Data Matricula</label>
+								<input type="date" class="form-control has-feedback-left"
+									name="dtInicioEB" id="dtInicioEB" placeholder="Data Matricula" />
+								<span class="fa fa-calendar form-control-feedback left"
+									aria-hidden="true"></span>
+							</div>
+
+							<div class="form-group">
+
+								<div id="botao">
+									<a class="btn btn-info" th:href="@{/escolaBiblica}">Cancelar</a>
+									<button class="btn btn-primary" type="reset">Limpar</button>
+									<button type="submit" class="btn btn-success">Matricular</button>
+
+								</div>
+							</div>
+					</form>
+				</div>
+				<div class="x_panel">
+					<h5>Alunos Matriculados</h5>
+
+					<div class="x_content">
+								<div class="card-box table-responsive">
+									 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th>Matricula</th>
+											<th>Aluno</th>
+											<th>Data Matricula</th>
+											<th>Status</th>
+											<th>-</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr th:each="biblica: ${addAlunosEB}">
+											<td th:text="${biblica.idAddAluno}" ></td>
+											<td th:text="${biblica.alunos.nome}">1</td>
+											<td th:text="${biblica.dtInicioEB}">1</td>
+											<td th:text="${biblica.alunos.tipo}">1</td>
+											<td>
+												<form method="POST"
+													th:onsubmit="'return confirm(\'Remover Turma ' + 
+													${biblica.alunos.nome} +' ?\');'"
+													th:action="@{/escolaBiblica/add/{idAddAluno}(idAddAluno=${biblica.idAddAluno})}">
+													<input type="hidden" name="_method" value="DELETE" />
+
+													<button type="submit" class="btn btn-danger btn-xs">
+														<span class="fa fa-trash"></span>
+													</button>
+												</form>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+								</div>
+							</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>SIGESIG</title>
+
+<link th:href="@{/css/bootstrap/dist/css/bootstrap.min.css}"
+	rel="stylesheet" />
+
+<link th:href="@{/css/bootstrap/dist/css/bootstrap-theme.min.css}"
+rel="stylesheet" />
+
+<link th:href="@{/css/font-awesome-4.7.0/css/font-awesome.min.css}"
+	rel="stylesheet" />
+<!-- NProgress -->
+<link th:href="@{/css/nprogress/nprogress.css}" rel="stylesheet" />
+<!-- Animate.css -->
+<link th:href="@{/css/animate.css/animate.min.css}" rel="stylesheet">
+
+<!-- Custom Theme Style -->
+<link th:href="@{/css/custom.min.css}" rel="stylesheet">
+<link th:href="@{/css/msg.css}" rel="stylesheet">
+
+
+
+</head>
+
+<body class="login">
+	<div>
+		<a class="hiddenanchor" id="signup"></a> <a class="hiddenanchor"
+			id="signin"></a>
+			
+		<div class="login_wrapper">
+			<div class="animate form login_form">
+			
+			<span th:if="${param.error}">						
+					    <p class="errorLogin" style='color:red' th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
+					</span>
+		
+
+		<div th:if="${param.logout}">
+			<div ><h4>Até Logo !</h4></div>
+		</div>
+				<section class="login_content">
+					<form action="/entrar" method="post">
+						<h1>Entrar</h1>
+						<div>
+							<input type="text" name="username" class="form-control"
+								placeholder="Usuário" required="" />
+						</div>
+									
+						<div>
+							<input type="password" name="password" class="form-control"
+								placeholder="Senha" required="" onkeypress="capLock(event)" />
+								<div id="divMayus" style="visibility:hidden">Caps Lock Ligado.</div>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-default submit">Entrar</button>
+						</div>
+					
+						<div class="clearfix"></div>
+
+						<div class="separator">
+							<div class="form-group">
+								<input type="checkbox" id="remember-me" name="remember-me" />
+								<label for="remember-me">Lembrar?</label>
+							</div>
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}" />
+
+							<div class="clearfix"></div>
+							<br />
+
+							<div>
+								<h1>
+									<i class="fa fa-handshake-o"></i> SIGESIG
+								</h1>
+								<p>©2018 BorgesCompany</p>
+							</div>
+						</div>
+					</form>
+				</section>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/MainlyLayout'">
+
+<body >
+	<section layout:fragment="content">
+		<div class="container-fluid">
+			<br />
+			
+			<!-- Aqui Mudou -->
+			
+
+				<div style="margin-top: 50px;">
+
+					<div id="foo" th:fragment="mensagemGeral"
+						class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
+						<span th:text="${message}"></span>
+					</div>
+
+					<div id="foo" th:fragment="mensagemErro" class="alert alert-danger"
+						th:if="${!#strings.isEmpty(messageErro)}">
+						<span th:text="${messageErro}"></span>
+					</div>
+
+					<div class="x_panel">
+						<div>
+							<h2 style="float: left;" th:text="${title}"></h2>
+							<a style="float: right;" class="btn btn-dark aw-link-panel"
+								th:href="@{/membros}"><i class="fa  fa-fw  fa-table"></i>&nbsp;
+								&nbsp;Listar Membros </a>
+							<div class="clearfix"></div>
+						</div>
+						<div>
+
+								<h5>Dados Pessoais</h5>
+					
+								<div class="x_panel">
+									<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
+										<label for="cpf" class="required">CPF</label> 
+										<input name="txtValid" id="txtValid"
+											 type="text" class="form-control has-feedback-left cpf"
+											  placeholder="CPF" /> <span
+											class="fa fa-address-book-o form-control-feedback left"
+											aria-hidden="true"></span>
+									</div>
+									
+									<div class="log-input-left">
+									<form id="form-login" method="post">
+              <input type="text" id="usuario" class="user"   onblur="buscar()" placeholder="Usu&aacute;rio"/>
+              <button class="btn btn-acessar">Acessar o Sistema</button>
+              </form> 
+           </div>
+								<div class="form-group">
+								
+								
+        <input type="submit" value="Sim" id="ValidaSim" onclick="ValidaSim()" />
+     
+      
+      
+								
+									<div id="botao">
+										<a class="btn btn-info" th:href="@{/membros}">Cancelar</a>
+										<a class="btn btn-info" th:href="@{/membros/buscaCpf/{cpf}(cpf=${cpfr})}">Testar</a>
+										<button class="btn btn-primary" type="reset">Limpar</button>
+            <a href="#" class="btn btn-success" > Enviar </a>
+       
+									</div>
+								</div>
+								</div>
+						
+						</div>
+					</div>
+				</div>
+		</div>
+
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/MainlyLayout'">
+
+<body>
+	<section layout:fragment="content">
+		<div th:each="mods : ${modulos}" class="container-fluid">
+			<br />
+			<br />
+<div class="x_panel ">
+				<div>
+					<h2 style="float: left;">Adicionar Aulas</h2>
+					<a style="float: right;" class="btn btn-dark aw-link-panel"
+						th:href="@{/capacitacaoDestino}"> <i
+						class="fa  fa-fw  fa-table"></i>&nbsp; &nbsp;Listar Turmas
+					</a> 
+					<a style="float: right;" th:href="@{/capacitacaoDestino/modulo/{id}(id=${mods.destino.idCD})}"
+						class="btn btn-dark aw-link-panel"> <i
+						class="fa  fa-fw  fa-table"></i>&nbsp; &nbsp;Listar Modulos
+					</a>
+					<a style="float: right;" th:href="@{/capacitacaoDestino/modulo/aluno/{id}(id=${mods.idModulo})}"
+						class="btn btn-dark aw-link-panel"> <i
+						class="fa  fa-fw  fa-plus-square"></i>&nbsp; &nbsp;Adicionar Aluno
+					</a>
+					 
+					<div class="clearfix"></div>
+				</div>
+
+						<div class="col-md-5 col-sm-6 col-xs-12 ">
+						<div class="x_panel">
+						<h5>Dados Modulo </h5>
+						<div  class="container">
+						
+							<div class="col-md-4 col-sm-6 col-xs-12">
+								<img th:src="${mods.modulo.img}"></img>
+							</div>
+							<div class="col-md-8 col-sm-6 col-xs-12">
+								<h4></br></br></br>
+									<span th:text="${mods.modulo.descricaoMod}"></span></br> Data
+									Inicio: <span th:text="${mods.dtInicio}"></span> Data Termino:
+									<span th:text="${mods.dtTermino}"></span>
+								</h4>
+							</div>
+						</div>
+						</div>
+					</div>
+				<div class="col-md-7 col-sm-6 col-xs-12 ">
+				<div class="x_panel">
+				<h5> Dados Alunos</h5>
+					<form class="form-horizontal" method="POST"
+						th:object="${aulaModulo}">
+						<div style="margin-top: 25px;">
+
+							<div id="foo" th:fragment="mensagemGeral"
+								class="alert alert-success"
+								th:if="${!#strings.isEmpty(message)}">
+								<span th:text="${message}"></span>
+							</div>
+
+							<div id="foo" th:fragment="mensagemErro"
+								class="alert alert-danger"
+								th:if="${!#strings.isEmpty(messageErro)}">
+								<span th:text="${messageErro}"></span>
+							</div>
+
+							<div id="foo" class="alert alert-danger"
+								th:if="${#fields.hasAnyErrors()}">
+								<div th:each="detailedError : ${#fields.detailedErrors()}">
+									<span th:text="${detailedError.message}"></span>
+								</div>
+
+							</div>
+						</div>
+						
+						
+						
+						<input type="hidden" th:field="*{idAulaModulo}" id="idAulaModulo" />
+						
+						<div class="col-md-12 col-sm-6 col-xs-12 form-group has-feedback"
+							th:classappend="${#fields.hasErrors('professorAula')} ? has-error">
+							<label for="professorAula" class="required">Professor</label> <select
+								id="professorAula" name="professorAula" class="form-control has-feedback-left">
+								<option value="">Selecione</option>
+								<option th:each="prof: ${professor}" th:value="${prof.idMembro}"
+									th:text="${prof.nome}">Opção 1</option>
+
+
+							</select> <span class="fa fa-graduation-cap form-control-feedback left"
+								aria-hidden="true"></span>
+						</div>
+						
+						<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+							th:classappend="${#fields.hasErrors('descAula')} ? has-error">
+							<label for="descAula" class="required">Descrição</label> <select
+								id="descAula" name="descAula" class="form-control has-feedback-left">
+								<option value="">Selecione</option>
+								<option th:each="desc: ${descricao}" th:value="${desc}"
+									th:text="${desc}">Opção 1</option>
+
+
+							</select> <span class="fa fa-graduation-cap form-control-feedback left"
+								aria-hidden="true"></span>
+						</div>
+
+						<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback"
+							th:classappend="${#fields.hasErrors('dataAula')} ? has-error">
+							<label for="dataAula" class="required">Data Aula</label>
+							<input type="date" class="form-control has-feedback-left"
+								name="dataAula" id="dtMatricula" placeholder="Data Aula" />
+							<span class="fa fa-calendar form-control-feedback left"
+								aria-hidden="true"></span>
+						</div>
+
+						<div class="form-group">
+
+							<div id="botao">
+								<button type="submit" class="btn btn-success">Adicionar</button>
+
+							</div>
+						</div>
+					</form>
+			</div>
+				</div>
+		
+				<div class="x_panel">
+					<h5>Alunos Matriculados</h5>
+
+					<div class="x_content">
+						<div class="card-box table-responsive">
+							<table id="datatable-responsive"
+								class="table table-striped table-bordered dt-responsive nowrap"
+								cellspacing="0" width="100%">
+								<thead>
+									<tr th:each="aula: ${aulaModulos}">
+										<td th:text="${aula.professorAula.nome}"></td>
+										<th>Professor</th>
+										<th>Data Aula</th>
+										<th>EX</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="aula: ${aulaModulos}">
+										<td th:text="${aula.descAula}"></td>
+										<td th:text="${aula.professorAula.nome}">1</td>
+										<td th:text="${aula.dataAula}">1</td>
+										<!--  td><a th:text="${lider.conclusao}" class="btn btn-info btn-xs"
+													th:href="@{/addAlunoCD/{idAddAlunoCD}(idAddAlunoCD=${lider.idAddAlunoCD})}"> 
+												</a></td-->
+										<td>
+											<form method="POST"
+												th:onsubmit="'return confirm(\'Remover ' + ${aula.descAula} +' do Professor ' +
+													${aula.professorAula.nome} +' ?\');'"
+												th:action="@{/capacitacaoDestino/aula/{idAulaModulo}(idAulaModulo=${aula.idAulaModulo})}">
+												<input type="hidden" name="_method" value="DELETE" />
+												
+
+												<button type="submit" class="btn btn-danger btn-xs">
+													<span class="fa fa-trash"></span>
+												</button>
+											</form>
+										</td>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+</div>
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/MainlyLayout'">
+
+<body>
+	<section layout:fragment="content">
+		<div class="container-fluid">
+			<br />
+			<div class="x_panel">
+				<div>
+					<h2 style="float: left;" th:text="${title}"></h2>
+					<a style="float: right;" class="btn btn-dark aw-link-panel"
+						th:href="@{/capacitacaoDestino}"><i
+						class="fa  fa-fw  fa-table"></i>&nbsp; &nbsp;Listar Turmas </a>
+
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_panel">
+
+					<h5>Turma</h5>
+
+					<span th:each="lider : ${capacitacao}">
+						<h5>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Turma: <a
+								class="btn btn-dark aw-link-panel"
+								th:href="@{/chamada/mods/{id}(id=${lider.idCD})}"
+								th:text="${lider.descCD}"></a> Templo: <label
+								th:text="${lider.templo.nomeFantasia}"></label>
+						</h5>
+
+
+
+					</span>
+
+				</div>
+				<div class="x_panel">
+					<h5>Modulos</h5>
+
+					<span th:each="modulo: ${criarModulos}"> <img
+						th:src="${modulo.modulo.img}" th:value="${modulo.descricao}"
+						height="121" width="88" /> <a class="btn btn-dark aw-link-panel"
+						th:href="@{/chamada/aula/{id}/{idMod}(id=${modulo.destino.idCD} ,idMod=${modulo.idModulo})}"
+						th:text="${modulo.modulo.descricaoMod}"></a>
+					</span>
+
+				</div>
+
+				<div class="x_panel">
+					<h5>Aulas</h5>
+
+					<div th:each="aula : ${aulas}" class="container">
+						<div class="row">
+							<h4>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+									class="btn btn-dark aw-link-panel"
+									th:href="@{/chamada/presenca/{id}/{idMod}(id=${aula.moduloAula.destino.idCD} ,idMod=${aula.moduloAula.idModulo})}"
+									th:text="${aula.descAula}"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Professor: <span th:text="${aula.professorAula.nome}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Data: <span th:text="${aula.dataAula}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</h4>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+						</div>
+
+					</div>
+				</div>
+
+				<div class="x_panel">
+					<h5>Alunos</h5>
+
+					<div th:each="alu : ${alunos}" class="container">
+						<div class="row">
+							<h5>
+								<input type="checkbox"></input>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+									th:text="${alu.alunos.nome}"></span>
+							</h5>
+
+						</div>
+
+					</div>
+				</div>
+
+<!--  
+				<div class="x_panel">
+					<div class="x_content">
+						<div class="card-box table-responsive">
+							<table id="datatable-responsive"
+								class="table table-striped table-bordered dt-responsive nowrap"
+								cellspacing="0" width="100%">
+								<thead>
+									<tr th:each="aula : ${aulas}">
+
+										<th>Aluno</th>
+										<th th:text="${aula.descAula}">Data Inicio</th>
+										<th>Data Término</th>
+										<th>EX</th>
+										<th><i class="fa  fa-fw  fa-plus-square"></i>&nbsp;&nbsp;&nbsp;Adicionar</th>
+										<th><i class="fa  fa-fw  fa-plus-square"></i>&nbsp;&nbsp;&nbsp;Adicionar</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="alu : ${alunos}">
+										<td th:text="${alu.alunos.nome}">1</td>
+										<!--  
+										<td><a class="btn btn-dark btn-xs"
+											th:href="@{/capacitacaoDestino/modulo/aluno/{idModulo}(idModulo=${criar.idModulo})}">
+												Aluno </a></td>
+										<td><a class="btn btn-dark btn-xs"
+											th:href="@{/capacitacaoDestino/modulo/aula/{idModulo}(idModulo=${criar.idModulo})}">
+												Aula </a></td>
+												
+										
+										
+										<td>
+											<form method="POST"
+												th:onsubmit="'return confirm(\'Remover Modulo ' + 
+													${criar.modulo.descricaoMod} +' ?\');'"
+												th:action="@{/capacitacaoDestino/modulo/{idModulo}/{id}(idModulo=${criar.idModulo} ,id=${criar.destino.idCD})}">
+												<input type="hidden" name="_method" value="DELETE" />
+
+												<button type="submit" class="btn btn-danger btn-xs">
+													<span class="fa fa-trash"></span>
+												</button>
+											</form>
+										</td>
+										
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				-->
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>
