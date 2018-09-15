@@ -35,6 +35,8 @@ import com.borges.igreja.util.Message;
  * @author Borges
  *
  *Teste de Commit
+ *Ultimo Commit Valido
+ *Teste Commit
  */
 @Controller
 @RequestMapping("/membros")
