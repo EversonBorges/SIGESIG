@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Modulos{
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long idModulo;
 	
 	@NotBlank(message = "Campo Data Inicio não pode estar em branco")

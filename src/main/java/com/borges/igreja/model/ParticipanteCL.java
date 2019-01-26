@@ -19,7 +19,7 @@ import com.borges.igreja.enumerators.Religiao;
 public class ParticipanteCL extends Endereco {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idParticipante;
 	
 	@NotBlank(message = "Campo Nome não pode estar em branco")

@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Ministerio {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idMinisterio;
 	
 	@NotBlank(message = "Campo Descrição não pode estar em branco")

@@ -21,7 +21,7 @@ import com.borges.igreja.enumerators.OperacaoEntrada;
 public class Entradas {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long idEntrada;
 	
 	@NotNull(message="Campo Tipo Entrada não pode estar em branco")

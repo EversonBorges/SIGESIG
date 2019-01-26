@@ -29,7 +29,7 @@ public class Visitantes extends Endereco implements Serializable {
 	private static final long serialVersionUID = -482479883742093689L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idVisitante;
 	
 	@NotBlank(message = "Campo Nome não pode estar em branco")
@@ -71,9 +71,6 @@ public class Visitantes extends Endereco implements Serializable {
 	}
 	public void setIdVisitante(Long idVisitante) {
 		this.idVisitante = idVisitante;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	public String getNome() {
 		return nome;

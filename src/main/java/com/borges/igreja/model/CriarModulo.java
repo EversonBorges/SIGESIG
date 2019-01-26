@@ -18,7 +18,7 @@ public class CriarModulo extends Imagens  {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long idCriarModulo;
 	
 	@NotBlank(message = "Campo Descrição não pode estar em branco")
@@ -39,11 +39,4 @@ public class CriarModulo extends Imagens  {
 	public void setDescricaoMod(String descricaoMod) {
 		this.descricaoMod = descricaoMod;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	
-
 }

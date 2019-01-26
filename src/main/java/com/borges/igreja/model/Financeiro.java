@@ -20,7 +20,7 @@ import com.borges.igreja.enumerators.Evento;
 public class Financeiro {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long IdEvento;
 	
 	@NotNull(message="Campo Mês Referência não pode estar em branco")

@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class AddAlunoEB {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idAddAluno;
 	
 	@NotNull(message = "Campo Aluno não pode estar em branco")

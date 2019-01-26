@@ -19,7 +19,7 @@ import com.borges.igreja.enumerators.Status;
 public class Celulas extends Endereco {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long idCelula;
 	
 	@NotBlank(message = "Campo Nome não pode estar em branco")

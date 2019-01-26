@@ -1,5 +1,6 @@
 package com.borges.igreja.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,13 +11,14 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Entity
+@Entity(name="AddAlunoCD")
 @Table(name="addalunocd")
 public class AddAlunoCD {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idAddAlunoCD;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="idAddAlunoCD")
+	private Integer idAddAlunoCD;
 	
 	@NotNull(message = "Campo Aluno não pode estar em branco")
 	@ManyToOne
@@ -26,15 +28,17 @@ public class AddAlunoCD {
 	private Modulos modulos;
 	
 	@NotBlank(message = "Campo Data Matricula não pode estar em branco")
+	@Column(name="dtMatricula")
 	private String dtMatricula;
 	
+	@Column(name="frequencia")
 	private float frequencia;
 	
-	public Long getIdAddAlunoCD() {
+	public Integer getIdAddAlunoCD() {
 		return idAddAlunoCD;
 	}
 
-	public void setIdAddAlunoCD(Long idAddAlunoCD) {
+	public void setIdAddAlunoCD(Integer idAddAlunoCD) {
 		this.idAddAlunoCD = idAddAlunoCD;
 	}
 

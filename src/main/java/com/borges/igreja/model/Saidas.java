@@ -17,7 +17,7 @@ import com.borges.igreja.enumerators.OperacaoSaida;
 public class Saidas {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long idSaida;
 	
 	@Enumerated(EnumType.STRING)

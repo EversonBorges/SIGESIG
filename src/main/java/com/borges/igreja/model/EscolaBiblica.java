@@ -20,7 +20,7 @@ import com.borges.igreja.enumerators.Turmas;
 public class EscolaBiblica {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idEB;
 	
 	@NotNull(message = "Campo Turma não pode estar em branco")
