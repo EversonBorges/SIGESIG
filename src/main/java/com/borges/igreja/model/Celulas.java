@@ -4,12 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.borges.igreja.enumerators.Status;
@@ -18,8 +19,17 @@ import com.borges.igreja.enumerators.Status;
 @Table(name="celulas")
 public class Celulas extends Endereco {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GenericGenerator(
+            name = "celulasSequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "celulasbSequence"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
+    @Id
+    @GeneratedValue(generator = "celulasSequenceGenerator")
 	private Long idCelula;
 	
 	@NotBlank(message = "Campo Nome não pode estar em branco")

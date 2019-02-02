@@ -1,21 +1,30 @@
 package com.borges.igreja.model;
 
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="modulos")
 public class Modulos{
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GenericGenerator(
+            name = "modulosSequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "modulosSequence"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
+    @Id
+    @GeneratedValue(generator = "modulosSequenceGenerator")
 	private Long idModulo;
 	
 	@NotBlank(message = "Campo Data Inicio não pode estar em branco")
