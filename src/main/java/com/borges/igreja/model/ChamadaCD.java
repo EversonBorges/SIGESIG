@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 @Entity
 @Table(name="chamadaCD")
 public class ChamadaCD implements Serializable {
@@ -20,8 +23,17 @@ public class ChamadaCD implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GenericGenerator(
+            name = "chamadaCdSequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "chamadaCdSequence"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
+    @Id
+    @GeneratedValue(generator = "chamadaCdSequenceGenerator")
 	private Long idChamada;
 	
 	@NotNull(message = "Campo Aluno não pode estar em branco")

@@ -2,20 +2,30 @@ package com.borges.igreja.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="addalunoeb")
 public class AddAlunoEB {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	 @GenericGenerator(
+	            name = "addalunoebSequenceGenerator",
+	            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+	            parameters = {
+	                    @Parameter(name = "sequence_name", value = "addalunoebSequence"),
+	                    @Parameter(name = "initial_value", value = "1"),
+	                    @Parameter(name = "increment_size", value = "1")
+	            }
+	    )
+	    @Id
+	    @GeneratedValue(generator = "addalunoebSequenceGenerator")
 	private Long idAddAluno;
 	
 	@NotNull(message = "Campo Aluno não pode estar em branco")

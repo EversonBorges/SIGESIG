@@ -4,12 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.borges.igreja.enumerators.AulaEnum;
@@ -18,8 +19,18 @@ import com.borges.igreja.enumerators.AulaEnum;
 @Table(name="aulaModulo")
 public class AulaModulo {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+
+	@GenericGenerator(
+            name = "aulaModuloSequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "aulaModuloSequence"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
+    @Id
+    @GeneratedValue(generator = "aulaModuloSequenceGenerator")
 	private Long idAulaModulo;
 	
 	@NotNull(message = "Campo Descrição não pode estar em branco")

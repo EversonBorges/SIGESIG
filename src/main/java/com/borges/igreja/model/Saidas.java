@@ -6,9 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import com.borges.igreja.enumerators.OperacaoSaida;
 
@@ -16,8 +18,17 @@ import com.borges.igreja.enumerators.OperacaoSaida;
 @Table(name="saidas")
 public class Saidas {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GenericGenerator(
+            name = "saidasSequenceGenerator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "saidasSequence"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
+    @Id
+    @GeneratedValue(generator = "saidasSequenceGenerator")
 	private Long idSaida;
 	
 	@Enumerated(EnumType.STRING)
