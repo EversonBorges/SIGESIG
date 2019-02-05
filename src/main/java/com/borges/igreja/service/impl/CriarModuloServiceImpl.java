@@ -42,12 +42,12 @@ public class CriarModuloServiceImpl implements ServiceAbstract<CriarModulo>,Imag
 		
 	}
 	
-	@Override
-	public void salvar(CriarModulo criarModulo, String imagem) {
-		criarModulo.setImg(imagem);
-		this.cmr.save(criarModulo);
-		
-	}
+//	@Override
+//	public void salvar(CriarModulo criarModulo, String imagem) {
+//		criarModulo.setImg(imagem);
+//		this.cmr.save(criarModulo);
+//		
+//	}
 
 	@Override
 	public void salvar(CriarModulo criarModulo) {

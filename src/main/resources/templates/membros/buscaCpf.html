@@ -4,13 +4,17 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="'layout/MainlyLayout'">
 
-<body >
+<body onload="exibe('experiencia');">
 	<section layout:fragment="content">
 		<div class="container-fluid">
 			<br />
-			
 			<!-- Aqui Mudou -->
 			
+			<form th:action="@{/membros/buscaCpf}" method="POST" th:object="${membros}">
+				
+			</form>
+			
+			<form th:action="@{/membros/buscaCpf}" method="POST" th:object="${membros}">
 
 				<div style="margin-top: 50px;">
 
@@ -24,7 +28,16 @@
 						<span th:text="${messageErro}"></span>
 					</div>
 
+					<div id="foo" class="alert alert-danger"
+						th:if="${#fields.hasAnyErrors()}">
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<span th:text="${detailedError.message}"></span>
+						</div>
+					</div>
 					<div class="x_panel">
+						<input type="hidden" th:field="*{idMembro}" /> 
+						<input type="hidden" th:field="*{matriculado}" /> 
+						<input type="hidden" th:field="*{concluido}" />
 						<div>
 							<h2 style="float: left;" th:text="${title}"></h2>
 							<a style="float: right;" class="btn btn-dark aw-link-panel"
@@ -34,45 +47,36 @@
 						</div>
 						<div>
 
+							<form class="form-horizontal form-label-left input_mask">
+
 								<h5>Dados Pessoais</h5>
-					
 								<div class="x_panel">
-									<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
-										<label for="cpf" class="required">CPF</label> 
-										<input name="txtValid" id="txtValid"
-											 type="text" class="form-control has-feedback-left cpf"
-											  placeholder="CPF" /> <span
+									<div
+										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
+										th:classappend="${#fields.hasErrors('cpf')} ? has-error">
+										<label for="cpf" class="required">CPF</label> <input
+											type="text" class="form-control has-feedback-left cpf"
+											th:field="*{cpf}" id="cpf" placeholder="CPF" /> <span
 											class="fa fa-address-book-o form-control-feedback left"
 											aria-hidden="true"></span>
 									</div>
-									
-									<div class="log-input-left">
-									<form id="form-login" method="post">
-              <input type="text" id="usuario" class="user"   onblur="buscar()" placeholder="Usu&aacute;rio"/>
-              <button class="btn btn-acessar">Acessar o Sistema</button>
-              </form> 
-           </div>
-								<div class="form-group">
-								
-								
-        <input type="submit" value="Sim" id="ValidaSim" onclick="ValidaSim()" />
-     
-      
-      
-								
-									<div id="botao">
-										<a class="btn btn-info" th:href="@{/membros}">Cancelar</a>
-										<a class="btn btn-info" th:href="@{/membros/buscaCpf/{cpf}(cpf=${cpfr})}">Testar</a>
-										<button class="btn btn-primary" type="reset">Limpar</button>
-            <a href="#" class="btn btn-success" > Enviar </a>
-       
+								</div>
+									<div class="form-group">
+
+										<div id="botao">
+											<a class="btn btn-info" th:href="@{/membros}">Cancelar</a>
+											<button class="btn btn-primary" type="reset">Limpar</button>
+											<button type="submit" class="btn btn-success  "
+												th:text="Enviar"></button>
+										</div>
 									</div>
-								</div>
-								</div>
-						
+							</form>
 						</div>
 					</div>
 				</div>
+
+			</form>
+
 		</div>
 
 	</section>

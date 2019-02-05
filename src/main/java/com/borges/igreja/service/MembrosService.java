@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.borges.igreja.model.Membros;
 
-public interface MembrosService extends ImagensService<Membros> {
+public interface MembrosService  {
 	
 	List<Membros> listMembros(Long  templo, Long turma);
 	
@@ -17,5 +17,7 @@ public interface MembrosService extends ImagensService<Membros> {
 	String buscaCpf(String cpf);
 	
 	List<Membros> listTemplo(Long templo);
+
+	void salvar(Membros membros);
 	
 }

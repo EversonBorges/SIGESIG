@@ -23,7 +23,7 @@ import com.borges.igreja.enumerators.Status;
 
 @Entity
 @Table(name = "membros")
-public class Membros extends Imagens implements  Serializable {
+public class Membros  implements  Serializable {
 
 	private static final long serialVersionUID = -482479883742093689L;
 	

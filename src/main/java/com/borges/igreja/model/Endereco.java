@@ -17,11 +17,11 @@ public abstract class Endereco {
 	protected String bairro;
 	protected String cidade;
 	protected String uf;
-	@NotBlank(message = "Campo Cep não pode estar em branco")
+	//@NotBlank(message = "Campo Cep não pode estar em branco")
 	protected String cep;
 	protected String complemento;
 	
-	@NotBlank(message = "Campo Celular não pode estar em branco")
+	//@NotBlank(message = "Campo Celular não pode estar em branco")
 	protected String celular;
 	protected String fixo;
 	

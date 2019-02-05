@@ -70,12 +70,12 @@ public class MembrosServiceImpl implements MembrosService, ServiceAbstract<Membr
 		
 	}
 
-	@Override
-	public void salvar(Membros membros, String imagem) {
-		membros.setImg(imagem);
-		this.mr.save(membros);
-		
-	}
+//	@Override
+//	public void salvar(Membros membros, String imagem) {
+//		membros.setImg(imagem);
+//		this.mr.save(membros);
+//		
+//	}
 
 	@Override
 	public String buscaCpf(String cpf) {

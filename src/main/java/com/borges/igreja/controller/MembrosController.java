@@ -64,34 +64,23 @@ public class MembrosController {
 	}
 	
 	@GetMapping("/buscaCpf")
-	public ModelAndView buscaCpfView() {
+	public ModelAndView buscaCpfView(Membros membros) {
 		ModelAndView modelAndView = new ModelAndView("membros/buscaCpf");
 		return modelAndView;
 	}
 	
-	 @RequestMapping("/request")
-     public String redirect() {
-         return "redirect:/query?q=Thymeleaf+Is+Great!";
-     }
-	
-	@GetMapping("/buscaCpf/{cpf}")
-	public ModelAndView buscaCpf(Membros membros,@PathVariable("cpf") String cpf,RedirectAttributes attributes) {
+	@PostMapping("/buscaCpf")
+	public ModelAndView buscaCpf(Membros membros,RedirectAttributes attributes,@AuthenticationPrincipal UsuarioSecurityModel usuario) {
 		
-		System.out.println("CPF Antes :"+cpf);
-		
-		
-		
-		System.out.println("CPF Modificado :"+cpf);
-		
-		String cpfs = membrosService.buscaCpf(cpf);
-		
-		System.out.println("CPF Apos :"+cpfs);
+		String cpfs = membrosService.buscaCpf(membros.getCpf());
 		
 		if (cpfs != null) {
 			attributes.addFlashAttribute("message", Message.getBuscaCpf());
 			return new ModelAndView("redirect:/membros"); 
 		} else {
-			return new ModelAndView("redirect:/membros/novo");
+			Membros membro = new Membros();
+			membro.setCpf(membros.getCpf());
+			return novo(membro,usuario);
 
 		}
 		
@@ -126,7 +115,7 @@ public class MembrosController {
 	}
 	
 	@PostMapping("/novo")
-	public ModelAndView salvar(@RequestParam("file") MultipartFile file, @Valid Membros membros,BindingResult result, RedirectAttributes attributes,@AuthenticationPrincipal UsuarioSecurityModel usuario){
+	public ModelAndView salvar(@Valid Membros membros,BindingResult result, RedirectAttributes attributes,@AuthenticationPrincipal UsuarioSecurityModel usuario){
 		
 		if (result.hasErrors()) {
 			return novo(membros,usuario);	
@@ -145,15 +134,15 @@ public class MembrosController {
 		}
 		
 		if(membros.getIdMembro() != null){
-			//membrosService.cadastrar(membros);
-			gravarImagem.gravaImagemBase64Service(file, membrosService, membros);
+			membrosService.cadastrar(membros);
+			//gravarImagem.gravaImagemBase64Service(file, membrosService, membros);
 			attributes.addFlashAttribute("message", Message.getMsgEditado());
 			return new ModelAndView("redirect:/membros/novo");
 		}
 		
-		//membrosService.cadastrar(membros);
+		membrosService.cadastrar(membros);
 		
-		gravarImagem.gravaImagemBase64Service(file, membrosService, membros);
+        //gravarImagem.gravaImagemBase64Service(file, membrosService, membros);
 		attributes.addFlashAttribute("message", Message.getMsgSucessoCadastrar());
 		return new ModelAndView("redirect:/membros/novo");
 	}
