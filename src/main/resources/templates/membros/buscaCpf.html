@@ -4,22 +4,17 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="'layout/MainlyLayout'">
 
-<body onload="exibe('experiencia');">
+<body>
 	<section layout:fragment="content">
 		<div class="container-fluid">
 			<br />
-			<!-- Aqui Mudou -->
-			
-			<form th:action="@{/membros/buscaCpf}" method="POST" th:object="${membros}">
-				
-			</form>
-			
-			<form th:action="@{/membros/buscaCpf}" method="POST" th:object="${membros}">
+			<form class="form-horizontal" th:action="@{/membros/buscaCpf}" method="POST"
+				th:object="${membros}">
 
 				<div style="margin-top: 50px;">
 
-					<div id="foo" th:fragment="mensagemGeral"
-						class="alert alert-success" th:if="${!#strings.isEmpty(message)}">
+					<div id="foo" th:fragment="mensagemGeral" class="alert alert-success"
+						th:if="${!#strings.isEmpty(message)}">
 						<span th:text="${message}"></span>
 					</div>
 
@@ -28,48 +23,44 @@
 						<span th:text="${messageErro}"></span>
 					</div>
 
-					<div id="foo" class="alert alert-danger"
-						th:if="${#fields.hasAnyErrors()}">
+					<div id="foo" class="alert alert-danger alert-box" th:if="${#fields.hasAnyErrors()}">
 						<div th:each="detailedError : ${#fields.detailedErrors()}">
 							<span th:text="${detailedError.message}"></span>
 						</div>
 					</div>
 					<div class="x_panel">
-						<input type="hidden" th:field="*{idMembro}" /> 
-						<input type="hidden" th:field="*{matriculado}" /> 
-						<input type="hidden" th:field="*{concluido}" />
 						<div>
-							<h2 style="float: left;" th:text="${title}"></h2>
+							<h2 style="float: left;">Verifica Cadastro</h2>
 							<a style="float: right;" class="btn btn-dark aw-link-panel"
 								th:href="@{/membros}"><i class="fa  fa-fw  fa-table"></i>&nbsp;
 								&nbsp;Listar Membros </a>
 							<div class="clearfix"></div>
 						</div>
-						<div>
-
+						<div class="x_panel">
+							
 							<form class="form-horizontal form-label-left input_mask">
-
-								<h5>Dados Pessoais</h5>
-								<div class="x_panel">
-									<div
-										class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback"
-										th:classappend="${#fields.hasErrors('cpf')} ? has-error">
-										<label for="cpf" class="required">CPF</label> <input
-											type="text" class="form-control has-feedback-left cpf"
-											th:field="*{cpf}" id="cpf" placeholder="CPF" /> <span
-											class="fa fa-address-book-o form-control-feedback left"
-											aria-hidden="true"></span>
-									</div>
+								<div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback"
+									th:classappend="${#fields.hasErrors('cpf')} ? has-error">
+									<label for="cpf" class="required">CPF</label> <input
+										type="text" class="form-control has-feedback-left cpf"
+										th:field="*{cpf}" id="cpf" placeholder="CPF" /> <span
+										class="fa fa-address-book-o form-control-feedback left"
+										aria-hidden="true"></span>
 								</div>
-									<div class="form-group">
+								<div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback"
+									th:classappend="${#fields.hasErrors('cpf')} ? has-error">
+									<label for="descricao"></label> 
+								</div>
+								
+								<div class="form-group">
+								<div id="botao">
+									<a class="btn btn-info" th:href="@{/membros}">Cancelar</a>
+									<button class="btn btn-primary" type="reset">Limpar</button>
+									<button type="submit" class="btn btn-success  "
+										th:text="Enviar"></button>
+								</div>
+							</div>
 
-										<div id="botao">
-											<a class="btn btn-info" th:href="@{/membros}">Cancelar</a>
-											<button class="btn btn-primary" type="reset">Limpar</button>
-											<button type="submit" class="btn btn-success  "
-												th:text="Enviar"></button>
-										</div>
-									</div>
 							</form>
 						</div>
 					</div>

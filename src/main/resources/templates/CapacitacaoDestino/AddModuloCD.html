@@ -45,7 +45,7 @@
 
 				<div class="x_panel">
 					<form class="form-horizontal js-form-loading" method="POST"
-						th:object="${modulos}">
+						th:object="${modulos}" th:action="@{capacitacaoDestino/modulo/{}}">
 						<div style="margin-top: 50px;">
 							<div id="foo" th:fragment="mensagemGeral"
 								class="alert alert-success"
