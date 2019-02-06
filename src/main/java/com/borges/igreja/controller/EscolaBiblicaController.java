@@ -147,7 +147,7 @@ public class EscolaBiblicaController {
 		modelAndView.addObject(alunoEB);
 		modelAndView.addObject("alunos", membrosService.listMembros(templo,turma));
 		modelAndView.addObject("escolasBiblicas", escolaBiblica);
-		
+		modelAndView.addObject("idEscola", escolaBiblica.getIdEB());
 
 		return modelAndView;	
 	}
@@ -157,7 +157,7 @@ public class EscolaBiblicaController {
 	 * @param addAlunoEB
 	 * @return
 	 */
-	@PostMapping("/add/{id}")
+	@PostMapping("/adicionarAluno/{id}")
 	public ModelAndView addAlunoPost(@PathVariable Long id,@Valid AddAlunoEB addAlunoEB,BindingResult result,RedirectAttributes attributes) {
 		
 		EscolaBiblica escolaBiblica = escolaBiblicaService.listarId(id);

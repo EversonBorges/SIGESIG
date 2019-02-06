@@ -18,6 +18,7 @@ import com.borges.igreja.enumerators.Status;
 import com.borges.igreja.model.AddAlunoCD;
 import com.borges.igreja.model.AulaModulo;
 import com.borges.igreja.model.CapacitacaoDestino;
+import com.borges.igreja.model.CriarModulo;
 import com.borges.igreja.model.Modulos;
 import com.borges.igreja.service.impl.AddAlunoCDServiceImpl;
 import com.borges.igreja.service.impl.AulaModuloServiceImpl;
@@ -152,6 +153,7 @@ public class CapacitacaoDestinoController {
 		modelAndView.addObject("modulos", criarModuloServiceImpl.listarTodos());
 		modelAndView.addObject("capacitacaoDestino", capacitacaoDestino);
 		modelAndView.addObject("criarModulos", modulosServiceImpl.listModulos(capacitacaoDestino));
+		modelAndView.addObject("idCapacitacao", capacitacaoDestino.getIdCD());
 
 		return modelAndView; 
 	}
@@ -163,15 +165,18 @@ public class CapacitacaoDestinoController {
 	 * @param attributes
 	 * @return
 	 */
-	@PostMapping("/modulo/{id}")
-	public ModelAndView moduloPost(@PathVariable Long id, @Valid Modulos modulos, BindingResult result,
+	@PostMapping("/modulo/{id}/{idCapacitacao}")
+	public ModelAndView moduloPost(@PathVariable Long id,@PathVariable Long idCapacitacao, @Valid Modulos modulos, BindingResult result,
 			RedirectAttributes attributes) {
 
-		CapacitacaoDestino capacitacaoDestino = capacitacaoDestinoService.listarId(id);
+		CapacitacaoDestino capacitacaoDestino = capacitacaoDestinoService.listarId(idCapacitacao);
+		CriarModulo modulo = criarModuloServiceImpl.listarId(id);
+		
 		modulos.setDestino(capacitacaoDestino);
+		modulos.setModulo(modulo);
 
 		if (result.hasErrors()) {
-			return modulo(id, modulos);
+			return modulo(idCapacitacao, modulos);
 		}
 		modulosServiceImpl.cadastrar(modulos);
 		attributes.addFlashAttribute("message", Message.getMsgSucessoCadastrar());
