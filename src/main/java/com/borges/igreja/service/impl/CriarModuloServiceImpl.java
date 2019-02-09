@@ -16,6 +16,10 @@ public class CriarModuloServiceImpl implements ServiceAbstract<CriarModulo>,Imag
 	@Autowired
 	private CriarModuloRepositoy cmr;
 	
+	//public CriarModulo buscaModuloDescricao(String descricaoMod) {
+		//return this.cmr.findByDescricaoMod(descricaoMod);
+	//}
+	
 	@Override
 	public List<CriarModulo> listarTodos() {
 		return this.cmr.findAll();

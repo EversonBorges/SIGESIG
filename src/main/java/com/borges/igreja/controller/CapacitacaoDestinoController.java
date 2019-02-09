@@ -56,7 +56,7 @@ public class CapacitacaoDestinoController {
 
 	@GetMapping
 	public ModelAndView listarTodos() {
-		ModelAndView modelAndView = new ModelAndView("CapacitacaoDestino/listarCD");
+		ModelAndView modelAndView = new ModelAndView("capacitacaoDestino/listarCD");
 		modelAndView.addObject("capacitacaoDestino", capacitacaoDestinoService.listarTodos());
 		return modelAndView;
 	}
@@ -67,7 +67,7 @@ public class CapacitacaoDestinoController {
 	 */
 	@GetMapping("/novo")
 	public ModelAndView novo(CapacitacaoDestino capacitacaoDestino) {
-		ModelAndView modelAndView = new ModelAndView("CapacitacaoDestino/cadastrarCD");
+		ModelAndView modelAndView = new ModelAndView("capacitacaoDestino/cadastrarCD");
 
 		if (capacitacaoDestino.getIdCD() == null) {
 			modelAndView.addObject("title", "Cadastrar Turma");
@@ -165,12 +165,12 @@ public class CapacitacaoDestinoController {
 	 * @param attributes
 	 * @return
 	 */
-	@PostMapping("/modulo/{id}/{idCapacitacao}")
-	public ModelAndView moduloPost(@PathVariable Long id,@PathVariable Long idCapacitacao, @Valid Modulos modulos, BindingResult result,
+	@PostMapping("/modulo/{idCapacitacao}")
+	public ModelAndView moduloPost(@PathVariable Long idCapacitacao, @Valid Modulos modulos, BindingResult result,
 			RedirectAttributes attributes) {
 
 		CapacitacaoDestino capacitacaoDestino = capacitacaoDestinoService.listarId(idCapacitacao);
-		CriarModulo modulo = criarModuloServiceImpl.listarId(id);
+		CriarModulo modulo = criarModuloServiceImpl.listarId(modulos.getModulo().getIdCriarModulo());
 		
 		modulos.setDestino(capacitacaoDestino);
 		modulos.setModulo(modulo);
@@ -180,7 +180,7 @@ public class CapacitacaoDestinoController {
 		}
 		modulosServiceImpl.cadastrar(modulos);
 		attributes.addFlashAttribute("message", Message.getMsgSucessoCadastrar());
-		return new ModelAndView("redirect:/capacitacaoDestino/modulo/{id}");
+		return modulo(idCapacitacao, modulos);
 	}
 
 	/**DELETA UM AULA REFERENTE AO ID DO MODULO
@@ -215,6 +215,7 @@ public class CapacitacaoDestinoController {
 		modelAndView.addObject(addAlunoCD);
 		modelAndView.addObject("alunos", membrosService.listarTodos());
 		modelAndView.addObject("modulos", modulos);
+		modelAndView.addObject("idModulo",id);
 
 		return modelAndView;
 	}
@@ -258,6 +259,7 @@ public class CapacitacaoDestinoController {
 		modelAndView.addObject("descricao", AulaEnum.values());
 		modelAndView.addObject("professor", membrosService.listarTodos());
 		modelAndView.addObject("modulos", modulos);
+		modelAndView.addObject("idModulo",id);
 
 		return modelAndView;
 
