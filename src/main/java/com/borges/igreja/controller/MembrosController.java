@@ -115,7 +115,9 @@ public class MembrosController {
 	}
 	
 	@PostMapping("/novo")
-	public ModelAndView salvar(@Valid Membros membros,BindingResult result, RedirectAttributes attributes,@AuthenticationPrincipal UsuarioSecurityModel usuario){
+	public ModelAndView salvar(@RequestParam("file") MultipartFile file,@Valid Membros membros,BindingResult result, RedirectAttributes attributes,@AuthenticationPrincipal UsuarioSecurityModel usuario){
+		
+		 String imagemString = null;
 		
 		if (result.hasErrors()) {
 			return novo(membros,usuario);	
@@ -133,9 +135,17 @@ public class MembrosController {
 			membros.setTurma(0);
 		}
 		
+		String retorno = gravarImagem.gravarImagemBase64(file);
+		
 		if(membros.getIdMembro() != null){
-			membrosService.cadastrar(membros);
-			//gravarImagem.gravaImagemBase64Service(file, membrosService, membros);
+			
+			if(retorno.isEmpty()) {
+				membrosService.cadastrar(membros);
+			}else {
+				imagemString = "data:image/png;base64,"+ retorno;
+				membrosService.salvarComImg(membros, imagemString);
+			}
+			
 			attributes.addFlashAttribute("message", Message.getMsgEditado());
 			return new ModelAndView("redirect:/membros/novo");
 		}

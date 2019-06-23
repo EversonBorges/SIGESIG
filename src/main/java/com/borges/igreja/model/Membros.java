@@ -23,7 +23,7 @@ import com.borges.igreja.enumerators.Status;
 
 @Entity
 @Table(name = "membros")
-public class Membros  implements  Serializable {
+public class Membros extends Imagens implements  Serializable {
 
 	private static final long serialVersionUID = -482479883742093689L;
 	
@@ -106,7 +106,7 @@ public class Membros  implements  Serializable {
 	
 	@Email(message = "EMAIL Inválido!")
 	private String email;
-	
+
 	public Opcao getBatizado() {
 		return batizado;
 	}
@@ -305,5 +305,4 @@ public class Membros  implements  Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 }

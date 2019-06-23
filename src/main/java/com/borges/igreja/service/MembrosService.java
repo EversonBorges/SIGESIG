@@ -19,5 +19,7 @@ public interface MembrosService  {
 	List<Membros> listTemplo(Long templo);
 
 	void salvar(Membros membros);
+
+	void salvarComImg(Membros membros, String imagem);
 	
 }

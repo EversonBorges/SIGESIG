@@ -51,7 +51,7 @@ public String imagemString;
 			service.salvar(entidade); //(1)
 		}else {
 			imagemString = "data:image/png;base64," + imagemString;
-			//service.salvar(entidade,imagemString); //(2)
+			service.salvar(entidade,imagemString); //(2)
 		}
        
         // devolve a imagem em string para ser utilizada em outro local
