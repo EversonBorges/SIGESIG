@@ -27,28 +27,27 @@
 					 
 					<div class="clearfix"></div>
 				</div>				
-						<div class="col-md-5 col-sm-6 col-xs-12 ">
+						<div class="col-md-4 col-sm-6 col-xs-12 ">
 						<div class="x_panel">
-						<h5>Dados Modulo </h5>
+						
 						<div class="container">
 						
-							<div class="col-md-4 col-sm-6 col-xs-12">
+							<div  class="col-md-4 col-sm-6 col-xs-12">
 								<img th:src="${lider.modulo.img}"></img>
 							</div>
 							
 							<div class="col-md-8 col-sm-6 col-xs-12">
-								<h4><br/><br/><br/>
-									<span th:text="${lider.modulo.descricaoMod}"></span></br> Data
-									Inicio: <span th:text="${lider.dtInicio}"></span> Data Termino:
-									<span th:text="${lider.dtTermino}"></span>
-								</h4>
+								<h5>
+									Descrição: <span class="stile" th:text="${lider.modulo.descricaoMod}"/></br> 
+									Inicio: <span class="stile" th:text="${lider.dtInicio}"/> </br> 
+									Termino:<span class="stile" th:text="${lider.dtTermino}"/>
+								</h5>
 							</div>
 						</div>
 						</div>
 					</div>
-				<div class="col-md-7 col-sm-6 col-xs-12 ">
+				<div class="col-md-8 col-sm-6 col-xs-12 ">
 				<div class="x_panel">
-				<h5> Dados Alunos</h5>
 					<form class="form-horizontal" method="POST"
 						th:object="${addAlunoCD}" th:action="@{/capacitacaoDestino/modulo/aluno/{id}(id=${idModulo})}">
 						<div style="margin-top: 25px;">
@@ -75,7 +74,7 @@
 						</div>
 						<input type="hidden" th:field="*{idAddAlunoCD}" id="idAddAlunoCD" />
 
-						<div class="col-md-12 col-sm-6 col-xs-12 form-group has-feedback"
+						<div class="col-md-7 col-sm-6 col-xs-12 form-group has-feedback"
 							th:classappend="${#fields.hasErrors('alunos')} ? has-error">
 							<label for="alunos" class="required">Aluno</label> <select
 								id="alunos" name="alunos" class="form-control has-feedback-left">
@@ -88,7 +87,7 @@
 								aria-hidden="true"></span>
 						</div>
 
-						<div class="col-md-12 col-sm-6 col-xs-12 form-group has-feedback"
+						<div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback"
 							th:classappend="${#fields.hasErrors('alunos')} ? has-error">
 							<label for="dtMatricula" class="required">Data Matricula</label>
 							<input type="date" class="form-control has-feedback-left"

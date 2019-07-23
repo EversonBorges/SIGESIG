@@ -1,9 +1,5 @@
 package com.borges.igreja.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +113,6 @@ public class MembrosController {
 	@PostMapping("/novo")
 	public ModelAndView salvar(@RequestParam("file") MultipartFile file,@Valid Membros membros,BindingResult result, RedirectAttributes attributes,@AuthenticationPrincipal UsuarioSecurityModel usuario){
 		
-		 String imagemString = null;
 		
 		if (result.hasErrors()) {
 			return novo(membros,usuario);	
@@ -134,25 +129,14 @@ public class MembrosController {
 		}else {
 			membros.setTurma(0);
 		}
-		
-		String retorno = gravarImagem.gravarImagemBase64(file);
-		
-		if(membros.getIdMembro() != null){
-			
-			if(retorno.isEmpty()) {
-				membrosService.cadastrar(membros);
-			}else {
-				imagemString = "data:image/png;base64,"+ retorno;
-				membrosService.salvarComImg(membros, imagemString);
-			}
-			
-			attributes.addFlashAttribute("message", Message.getMsgEditado());
+				
+		if (membros.getIdMembro() != null) {
+			gravarImagem.gravaImagemBase64Service(file, membrosService, membros);
+			attributes.addFlashAttribute("message",Message.getMsgEditado());
 			return new ModelAndView("redirect:/membros/novo");
 		}
 		
-		membrosService.cadastrar(membros);
-		
-        //gravarImagem.gravaImagemBase64Service(file, membrosService, membros);
+        gravarImagem.gravaImagemBase64Service(file, membrosService, membros);
 		attributes.addFlashAttribute("message", Message.getMsgSucessoCadastrar());
 		return new ModelAndView("redirect:/membros/novo");
 	}

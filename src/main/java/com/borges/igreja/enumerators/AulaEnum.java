@@ -33,21 +33,4 @@ public enum AulaEnum {
 		public String getNomeAula() {
 			return nomeAula;
 		}
-
-
-		public static List<AulaEnum> findAll(){
-			ArrayList<AulaEnum> lista = new ArrayList<AulaEnum>();
-			
-			lista.add(AulaEnum.Aula_01);
-			lista.add(AulaEnum.Aula_02);
-			lista.add(AulaEnum.Aula_03);
-			lista.add(AulaEnum.Aula_04);
-			lista.add(AulaEnum.Aula_05);
-			lista.add(AulaEnum.Aula_06);
-			lista.add(AulaEnum.Aula_07);
-			lista.add(AulaEnum.Aula_08);
-			lista.add(AulaEnum.Aula_09);
-			lista.add(AulaEnum.Aula_10);
-			return lista;
-		}
 }

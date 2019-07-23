@@ -24,28 +24,26 @@
 
 					<div th:each="lider : ${capacitacaoDestino}" class="container">
 						<div class="row">
-							<h4>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Código: <span
-									th:text="${lider.idCD}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Templo: <span th:text="${lider.templo.nomeFantasia}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Data Inicio: <span th:text="${lider.dtInicio}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Status: <span th:text="${lider.tipo}"></span>
-							</h4>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+							<h5>
+								Turma: <span class="stile" th:text="${lider.descCD}"></span><br>
+								Templo: <span class="stile" th:text="${lider.templo.nomeFantasia}"></span><br>
+								Data Inicio: <span class="stile" th:text="${lider.dtInicio}"></span><br>
+								Status: <span class="stile" th:text="${lider.tipo}"></span>
+							</h5>
 						</div>
 					</div>
 				</div>
-				<div class="x_panel">
+				<div class="x_panel" style="text-align:center;">
 						<span th:each="modulo: ${modulos}">
-						<img th:src="${modulo.img}" th:value="${modulo.descricaoMod}" onclick="add(value);add2(value)" />
-						<button th:text="${modulo.descricaoMod}" th:value="${modulo.idCriarModulo}" onclick="add(value)" class="btn btn-dark aw-link-panel" ></button>
+							<img th:value="${modulo.descricaoMod}" th:src="${modulo.img}" 
+							th:onclick="'javascript:add(\''+ ${modulo.idCriarModulo} +'\',\''+ ${modulo.descricaoMod} +'\');'" />
 						</span>	
 				</div>
 
 				<div class="x_panel">
-					<form class="form-horizontal js-form-loading" method="POST"
-						th:object="${modulos}" th:action="@{/capacitacaoDestino/modulo/{idCapacitacao}(idCapacitacao=${idCapacitacao})}">
+					<form class="form-horizontal js-form-loading" method="POST" th:object="${modulos}" 
+					th:action="@{/capacitacaoDestino/modulo/{idCapacitacao}(idCapacitacao=${idCapacitacao})}">
+						
 						<div style="margin-top: 50px;">
 							<div id="foo" th:fragment="mensagemGeral"
 								class="alert alert-success"
@@ -69,23 +67,23 @@
 						</div>
 							<h5>Dados Gerais</h5>
 							<div class="ln_solid"></div>
-							<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
-								<label for="descricao" class="required">Modulo</label> <input
+							<div hidden="true" class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
+								<input
 									type="text" class="form-control has-feedback-left"
-									name="modulo" id="modulo" placeholder="Modulo" /> <span
-									class="fa fa-calendar form-control-feedback left"
-									aria-hidden="true"></span>
+									name="modulo" id="modulo" placeholder="Modulo" /> 
 							</div>
-							<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
-								<!--  th:classappend="${#fields.hasErrors('descricao')} ? has-error"-->
+							
+							<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback" 
+							>
 								<label for="descricao" class="required">Descrição</label> <input
 									type="text" class="form-control has-feedback-left"
-									name="descricao" id="descricao" placeholder="Descrição" /> <span
+									name="descricao" id="descricao" placeholder="Descrição" readonly="readonly"/> <span
 									class="fa fa-calendar form-control-feedback left"
 									aria-hidden="true"></span>
 							</div>
-							<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
-								<!--  th:classappend="${#fields.hasErrors('dtInicio')} ? has-error"-->
+							
+							<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+								>
 								<label for="dtInicio" class="required">Data Inicio</label> <input
 									type="date" class="form-control has-feedback-left"
 									name="dtInicio" id="dtInicio" placeholder="Data Inicio" /> <span
@@ -93,8 +91,8 @@
 									aria-hidden="true"></span>
 							</div>
 
-							<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
-								<!--  th:classappend="${#fields.hasErrors('dtTermino')} ? has-error"-->
+							<div class="col-md-4 col-sm-6 col-xs-12 form-group has-feedback"
+							>
 								<label for="dtTermino" class="required">Data Término</label> <input
 									type="date" class="form-control has-feedback-left"
 									name="dtTermino" id="dtTermino" placeholder="Data Termino" />
@@ -122,7 +120,6 @@
 									<thead>
 										<tr>
 											<th><i class="fa  fa-fw  fa-plus-square"></i>&nbsp;&nbsp;&nbsp;Adicionar</th>
-											<th><i class="fa  fa-fw  fa-plus-square"></i>&nbsp;&nbsp;&nbsp;Adicionar</th>
 											<th>Descrição</th>
 											<th>Data Inicio</th>
 											<th>Data Término</th>
@@ -132,10 +129,6 @@
 
 									<tbody>
 										<tr th:each="criar: ${criarModulos}">
-											<td><a class="btn btn-dark btn-xs"
-													th:href="@{/capacitacaoDestino/modulo/aluno/{idModulo}(idModulo=${criar.idModulo})}"> 
-													Aluno
-												</a></td>
 												<td><a class="btn btn-dark btn-xs"
 													th:href="@{/capacitacaoDestino/modulo/aula/{idModulo}(idModulo=${criar.idModulo})}"> 
 													Aula

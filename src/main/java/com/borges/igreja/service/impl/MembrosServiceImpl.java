@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.borges.igreja.model.Membros;
 import com.borges.igreja.repository.MembrosRepository;
+import com.borges.igreja.service.ImagensService;
 import com.borges.igreja.service.MembrosService;
 import com.borges.igreja.service.ServiceAbstract;
 @Service
-public class MembrosServiceImpl implements MembrosService, ServiceAbstract<Membros> {
+public class MembrosServiceImpl implements MembrosService, ServiceAbstract<Membros>,ImagensService<Membros> {
 
 	@Autowired
 	MembrosRepository mr;
@@ -71,7 +72,7 @@ public class MembrosServiceImpl implements MembrosService, ServiceAbstract<Membr
 	}
 
 	@Override
-	public void salvarComImg(Membros membros, String imagem) {
+	public void salvar(Membros membros, String imagem) {
 		membros.setImg(imagem);
 		this.mr.save(membros);
 		
@@ -86,4 +87,5 @@ public class MembrosServiceImpl implements MembrosService, ServiceAbstract<Membr
 	public List<Membros> listTemplo(Long templo) {
 		return this.mr.findAllMembrosTemplo(templo);
 	}
+
 }

@@ -17,31 +17,4 @@
 			$('#foo').hide(); // "foo" é o id do elemento que seja manipular.
 		}, 3000); // O valor é representado em milisegundos.
 	});
-  
-  //BUSCA CPF
-  var baseUri = 'http://localhost:8080/membros/buscaCpf/'
 
-	  function ValidaSim() {
-
-	    var uri = baseUri + $('#txtValid').val();
-	    alert(uri); // Remover esta linha depois quando implementar em seu projeto.
-	    window.location = uri;
-
-	  }
-  
-  function buscar(){
-      alert('Salvar');
-     var nome = document.getElementById("usuario").value;
-
-  jQuery.ajax({
-      type:  'POST',
-      url:   'membros/empresa',
-      dataType: 'json',
-      data: {
-          usuario     : nome
-      },
-      success: function(data){
-         alert(data.response);
-      }
-  });       
-}

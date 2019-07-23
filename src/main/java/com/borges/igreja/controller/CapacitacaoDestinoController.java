@@ -1,5 +1,9 @@
 package com.borges.igreja.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -211,11 +215,14 @@ public class CapacitacaoDestinoController {
 	public ModelAndView aluno(@PathVariable Long id, AddAlunoCD addAlunoCD) {
 		Modulos modulos = modulosServiceImpl.listarId(id);
 		ModelAndView modelAndView = new ModelAndView("capacitacaoDestino/AddAlunoCD");
+		
 		modelAndView.addObject("addAlunosCD", addAlunoCDService.listAluno(modulos));
 		modelAndView.addObject(addAlunoCD);
 		modelAndView.addObject("alunos", membrosService.listarTodos());
 		modelAndView.addObject("modulos", modulos);
 		modelAndView.addObject("idModulo",id);
+		
+		
 
 		return modelAndView;
 	}
@@ -252,6 +259,16 @@ public class CapacitacaoDestinoController {
 	 */
 	@GetMapping("modulo/aula/{id}")
 	public ModelAndView aulaMod(@PathVariable Long id, AulaModulo aulaModulo) {
+		
+		/*
+		 * AulaEnum[] values = AulaEnum.values();
+		List<String> enums = new ArrayList<String>();
+		
+		Arrays.asList(values).forEach(value -> {
+			enums.add(value.getNomeAula());
+		});
+		 */
+		
 		Modulos modulos = modulosServiceImpl.listarId(id);
 		ModelAndView modelAndView = new ModelAndView("capacitacaoDestino/AddAulaMod");
 		modelAndView.addObject("aulaModulos", aulaModuloServiceImpl.listModulo(modulos));
