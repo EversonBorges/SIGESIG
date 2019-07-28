@@ -106,7 +106,7 @@ public class Membros extends Imagens implements  Serializable {
 	
 	@Email(message = "EMAIL Inválido!")
 	private String email;
-	
+
 	public Opcao getBatizado() {
 		return batizado;
 	}
@@ -305,5 +305,4 @@ public class Membros extends Imagens implements  Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 }

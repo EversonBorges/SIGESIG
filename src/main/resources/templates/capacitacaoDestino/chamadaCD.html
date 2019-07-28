@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/MainlyLayout'">
+
+<body>
+	<section layout:fragment="content">
+		<div class="container-fluid">
+			<br />
+			<div class="x_panel">
+				<div>
+					<h2 style="float: left;" th:text="${title}"></h2>
+					<a style="float: right;" class="btn btn-dark aw-link-panel"
+						th:href="@{/capacitacaoDestino}"><i
+						class="fa  fa-fw  fa-table"></i>&nbsp; &nbsp;Listar Turmas </a>
+
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_panel">
+
+					<h5>Turma</h5>
+
+					<span th:each="lider : ${capacitacao}">
+						<h5>
+							Turma: <a class="btn btn-dark aw-link-panel"
+								th:href="@{/chamada/mods/{id}(id=${lider.idCD})}"
+								th:text="${lider.descCD}"></a> Templo: <label
+								th:text="${lider.templo.nomeFantasia}"></label>
+						</h5>
+					</span>
+				</div>
+
+				<div class="x_panel">
+					<h5>Modulos</h5>
+					<div style="text-align: center;">
+						<span th:each="modulo: ${criarModulos}"> <a
+							th:href="@{/chamada/aula/{id}/{idMod}(id=${modulo.destino.idCD} ,idMod=${modulo.idModulo})}">
+								<img th:src="${modulo.modulo.img}"
+								th:value="${modulo.descricao}" height="121" width="88"/>
+						</a>
+						</span>
+						
+					</div>
+					<div style="text-align: center;">
+						<span th:each="modulo: ${criarModulos}"> <a
+							th:href="@{/chamada/aula/{id}/{idMod}(id=${modulo.destino.idCD} ,idMod=${modulo.idModulo})}">
+								<input th:type="image" width="88" height="130" value="Pesquisafffr">
+						</a>
+						</span>
+						
+					</div>
+				</div>
+
+				<div class="x_panel">
+					<h5> Aulas </h5>
+					<div th:each="aula : ${aulas}" class="container">
+						<div class="row">
+							<h5>
+							<span class="stile" th:text="${aula.moduloAula.descricao}"/> -
+								<a class="btn btn-dark aw-link-panel"
+									th:href="@{/chamada/presenca/{id}/{idMod}(id=${aula.moduloAula.destino.idCD} ,idMod=${aula.moduloAula.idModulo})}"
+									th:text="${aula.descAula}"></a> 
+									Professor: <span class="stile"
+									th:text="${aula.professorAula.nome}"></span> Data: <span
+									class="stile" th:text="${aula.dataAula}"></span>
+							</h5>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="x_panel">
+					<h5>Alunos</h5>
+
+					<div th:each="alu : ${alunos}" class="container">
+						<div class="row">
+							<h5>
+								<input type="checkbox"></input><span
+									th:text="${alu.alunos.nome}"></span>
+							</h5>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

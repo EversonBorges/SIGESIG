@@ -72,3 +72,16 @@ canvas {
   font-size: 13px; 
   color:#a94442;
 }
+
+.stile{
+	color: #5A738E;
+	font-size: 20px;
+	text-align: justify;
+}
+
+.x_panel img{
+	border: 1px solid;
+	margin:2px;
+	white-space: nowrap;
+	color: #E6E9ED;
+}

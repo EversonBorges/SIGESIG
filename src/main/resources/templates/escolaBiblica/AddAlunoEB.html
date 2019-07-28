@@ -37,7 +37,7 @@
 				</div>
 				<div class="x_panel">
 					<form class="form-horizontal" method="POST"
-						th:object="${addAlunoEB}">
+						th:object="${addAlunoEB}" th:action="@{/escolaBiblica/adicionarAluno/{idEscola}(idEscola=${idEscola})}" >
 						<div style="margin-top: 50px;">
 
 							<div id="foo" th:fragment="mensagemGeral"

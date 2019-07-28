@@ -33,17 +33,17 @@ public class Templo extends Endereco {
     @GeneratedValue(generator = "temploSequenceGenerator")
 	private Long idTemplo;
 	
-	@NotBlank(message = "Campo Nome Fantasia não pode estar em branco")
+//	@NotBlank(message = "Campo Nome Fantasia não pode estar em branco")
 	private String nomeFantasia;
 	
-	@NotBlank(message = "Campo Razão Social não pode estar em branco")
+//	@NotBlank(message = "Campo Razão Social não pode estar em branco")
 	private String razaoSocial;
 	
-	@NotBlank(message = "Campo CNPJ não pode estar em branco")
+//	@NotBlank(message = "Campo CNPJ não pode estar em branco")
 	@CNPJ(message = "CNPJ Inválido!")
 	private String cnpj;
 	
-	@NotBlank(message = "Campo Data Abertura não pode estar em branco")
+	//@NotBlank(message = "Campo Data Abertura não pode estar em branco")
 	private String dtAbertura;
 	
 	@ManyToOne
@@ -52,7 +52,7 @@ public class Templo extends Endereco {
 	@ManyToOne
 	private Membros pastorAux;
 	
-	@NotNull(message = "Campo Status não pode estar em branco")
+	//@NotNull(message = "Campo Status não pode estar em branco")
 	@Enumerated(EnumType.STRING)
 	private Status tipo;
 	

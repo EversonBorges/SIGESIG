@@ -11,7 +11,7 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="criarModulo")
+@Table(name="criar_modulo")
 public class CriarModulo extends Imagens  {
 	
 	/**
